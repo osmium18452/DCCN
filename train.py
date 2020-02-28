@@ -171,12 +171,15 @@ with tf.Session() as sess:
 	with open(os.path.join(dataSavePath, "summary.txt"), "w+") as f:
 		print("OA: %4f, AA: %4f, KAPPA: %4f" % (OA, AA, kappa), file=f)
 		print("******* MIX MAP *******", file=f)
-		print("   |", file=f)
+		print("   |", end="",file=f)
 		for i in range(dataloader.numClasses):
 			print("%6d"%i,end="", file=f)
+		print(file=f)
 		for i in range(6*dataloader.numClasses):
 			print("-",end="", file=f)
+		print(file=f)
 		for i in range(dataloader.numClasses):
 			print("%2d"%i,end=" |", file=f)
 			for j in range(dataloader.numClasses):
 				print("%6d"%mixMatrix[i][j],end="", file=f)
+			print(file=f)

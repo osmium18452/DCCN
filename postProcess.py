@@ -16,6 +16,8 @@ class TrainProcess:
 		self.testAcc = np.array([])
 		self.dataDir = os.path.join(path, "data")
 		self.imgDir = os.path.join(path, "img")
+		if not os.path.exists(self.imgDir):
+			os.makedirs(self.imgDir)
 
 	def addData(self, trainLoss, trainAcc, testLoss, testAcc):
 		self.trainLoss = np.append(self.trainLoss, trainLoss)
@@ -64,9 +66,9 @@ class TrainProcess:
 		l4, = ax2.plot(x, self.testAcc, color="tab:red", label="test accuracy", **kwargs)
 
 		plt.legend(handles=[l1, l2, l3, l4], loc="center right")
-		# sv = plt.gcf()
-		# sv.savefig(os.path.join(self.imgDir,"trainAndTest.eps"),format="eps",dpi=300)
-		plt.show()
+		sv = plt.gcf()
+		sv.savefig(os.path.join(self.imgDir,"trainAndTest.eps"),format="eps",dpi=300)
+		# plt.show()
 
 	def drawLoss(self):
 		plt.figure()
@@ -231,10 +233,10 @@ class ProbMap:
 
 
 if __name__ == "__main__":
-	# trainProcess = TrainProcess(os.path.join(".", "save", "default"))
-	# trainProcess.restore()
-	# trainProcess.draw()
-	# exit(0)
+	trainProcess = TrainProcess(os.path.join(".", "save", "feb28"))
+	trainProcess.restore()
+	trainProcess.draw()
+	exit(0)
 
 	pathName = []
 	pathName.append("./data/Indian_pines.mat")
