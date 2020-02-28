@@ -96,7 +96,7 @@ with tf.Session() as sess:
 				trainLabel = trainLabel[permutation, :]
 
 			iter = dataloader.trainNum // BATCH_SIZE
-			with tqdm(total=iter, desc="epoch %3d" % (epoch + 1), ncols=LENGTH) as pbar:
+			with tqdm(total=iter, desc="epoch %3d/%3d" % (epoch + 1,EPOCHS), ncols=LENGTH) as pbar:
 				for i in range(iter):
 					batch_w = trainSpectrum[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :]
 					batch_x = trainPatch[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :, :]
