@@ -168,6 +168,7 @@ with tf.Session() as sess:
 	kappa = calKappa(probMap.map, allLabeledLabel)
 	mixMatrix = calMixMatrix(probMap.map, allLabeledLabel)
 
-	print("OA: %4f, AA: %4f, KAPPA: %4f" % (OA, AA, kappa))
-	print("******* MIX MAP *******")
-	print(mixMatrix)
+	with open(os.path.join(dataSavePath, "summary"), "w+") as f:
+		print("OA: %4f, AA: %4f, KAPPA: %4f" % (OA, AA, kappa), file=f)
+		print("******* MIX MAP *******", file=f)
+		print(mixMatrix, file=f)

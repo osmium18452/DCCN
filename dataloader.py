@@ -2,7 +2,6 @@ import numpy as np
 import scipy.io
 from tqdm import tqdm
 from utils import convertToOneHot, LENGTH
-import time
 import random
 import scipy.ndimage
 

@@ -124,6 +124,14 @@ def selectData(DATA=1):
 		matName.append("salinasA_corrected")
 		matName.append("salinasA_gt")
 		print("using salinasA**************************")
+	elif DATA==6:
+		pathName = []
+		pathName.append("./data/KSC.mat")
+		pathName.append("./data/KSC_gt.mat")
+		matName = []
+		matName.append("KSC")
+		matName.append("KSC_gt")
+		print("using KSC**************************")
 	else:
 		pathName = []
 		pathName.append("./data/Indian_pines.mat")
