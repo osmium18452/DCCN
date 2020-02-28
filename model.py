@@ -59,7 +59,6 @@ def DCCapsNet(patch, spectrum, k, output):
 	return act
 
 
-
 def CapsNet(net, output):
 	conv1 = tf.layers.conv2d(
 		net,
@@ -92,4 +91,3 @@ def CapsNet(net, output):
 		routing_method="DynamicRouting"
 	)
 	return rt_probs
-

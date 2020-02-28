@@ -273,7 +273,7 @@ if __name__ == "__main__":
 	# print([5 for i in range(10)])
 
 	data = DataLoader(pathName, matName, 5, 0.2, 0)
-	print(data.height,data.width,data.bands)
+	print(data.height, data.width, data.bands)
 	patch, spectrum, label = data.loadAllLabeledData()
 	print(np.shape(patch), np.shape(spectrum), np.shape(label))
 # print(np.shape(patch), np.shape(label))

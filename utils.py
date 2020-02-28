@@ -150,7 +150,7 @@ if __name__ == "__main__":
 									"-d ./save/feb25/dataImg/%d --model_path ./save/feb25/model/%d" % (
 										lr, r, p, epoch, a, data, counter, counter), file=f)
 								counter += 1
-					# print(epoch,lr,r,a,p,data)
+				# print(epoch,lr,r,a,p,data)
 
 	exit(0)
 

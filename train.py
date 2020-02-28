@@ -166,9 +166,8 @@ with tf.Session() as sess:
 	OA = calOA(probMap.map, allLabeledLabel)
 	AA = calAA(probMap.map, allLabeledLabel)
 	kappa = calKappa(probMap.map, allLabeledLabel)
-	mixMatrix=calMixMatrix(probMap.map,allLabeledLabel)
+	mixMatrix = calMixMatrix(probMap.map, allLabeledLabel)
 
 	print("OA: %4f, AA: %4f, KAPPA: %4f" % (OA, AA, kappa))
 	print("******* MIX MAP *******")
 	print(mixMatrix)
-
