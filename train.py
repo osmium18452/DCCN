@@ -5,13 +5,13 @@ import capslayer as cl
 import os
 import argparse
 from dataloader import DataLoader
-from model import DCCapsNet, CapsNet, DCCN2, DCCN3
+from model import DCCapsNet, CapsNet
 from utils import LENGTH, calOA, selectData, calMixMatrix, calAA, calKappa
 from postProcess import TrainProcess, ProbMap
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-e", "--epochs", default=50, type=int)
-parser.add_argument("-b", "--batch_size", default=100, type=int)
+parser.add_argument("-b", "--batch_size", default=50, type=int)
 parser.add_argument("-l", "--lr", default=0.001, type=float)
 parser.add_argument("-g", "--gpu", default="0")
 parser.add_argument("-r", "--ratio", default=0.1, type=float)
@@ -67,15 +67,9 @@ k = tf.placeholder(dtype=tf.float32)
 if args.model == 1:
 	pred = DCCapsNet(x, w, k, dataloader.numClasses)
 	print("USING DCCAPS***************************************")
-elif args.model == 2:
+else:
 	pred = CapsNet(x, dataloader.numClasses)
 	print("USING CAPS*****************************************")
-elif args.model == 3:
-	pred = DCCN2(x, w, k, dataloader.numClasses)
-	print("USING DCCN2****************************************")
-else:
-	pred = DCCN3(x, w, k, dataloader.numClasses)
-	print("USING DCCN3****************************************")
 pred = tf.divide(pred, tf.reduce_sum(pred, 1, keep_dims=True))
 
 loss = tf.reduce_mean(cl.losses.margin_loss(y, pred))
@@ -172,9 +166,9 @@ with tf.Session() as sess:
 	OA = calOA(probMap.map, allLabeledLabel)
 	AA = calAA(probMap.map, allLabeledLabel)
 	kappa = calKappa(probMap.map, allLabeledLabel)
+	mixMatrix=calMixMatrix(probMap.map,allLabeledLabel)
 
 	print("OA: %4f, AA: %4f, KAPPA: %4f" % (OA, AA, kappa))
+	print("******* MIX MAP *******")
+	print(mixMatrix)
 
-# with open(os.path.join(DIRECTORY, "summary.txt"), "w+") as f:
-# 	print("OA:", OA, file=f)
-# 	print(args, file=f)

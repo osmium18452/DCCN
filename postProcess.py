@@ -131,8 +131,8 @@ class ProbMap:
 		pred = np.argmax(self.map, axis=1)
 		probMap = np.zeros(shape=(self.height, self.width))
 		cmap = mpl.colors.ListedColormap(
-			["#000000", "#DDDDFF", "#7D7DFF", "#0000C6", "#000079", "#CEFFCE", "#28FF28", "#007500", "#FFFF93",
-			 "#8C8C00", "#00B5B5", "#FF0000", "#CE0B50", "#750000", "#00C864", "#00FF00"])
+			["black", "snow", "red", "tomato", " chocolate", "orange", "wheat", "gold", "yellow", "chartreuse",
+			 " limegreen", "aquamarine", "cyan", "dodgerblue", "slateblue", "violet", "pink"])
 		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt") as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
