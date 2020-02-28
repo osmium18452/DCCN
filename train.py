@@ -175,7 +175,7 @@ with tf.Session() as sess:
 		for i in range(dataloader.numClasses):
 			print("%6d"%i,end="", file=f)
 		print(file=f)
-		for i in range(6*dataloader.numClasses):
+		for i in range(6*dataloader.numClasses+4):
 			print("-",end="", file=f)
 		print(file=f)
 		for i in range(dataloader.numClasses):
