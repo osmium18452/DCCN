@@ -23,6 +23,7 @@ parser.add_argument("--model_path", default="./save/default/model")
 parser.add_argument("--predict_only", action="store_true")
 parser.add_argument("--restore", action="store_true")
 parser.add_argument("--use_best_model", action="store_true")
+parser.add_argument("--draw",action="store_true")
 parser.add_argument("--drop", default=1, type=float)
 parser.add_argument("--data", default=0, type=int)
 args = parser.parse_args()
@@ -41,6 +42,7 @@ RESTORE = args.restore
 PREDICT_ONLY = args.predict_only
 MODEL_DIRECTORY = args.model_path
 USE_BEST_MODEL = args.use_best_model
+DRAW=args.draw
 
 os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
 if not os.path.exists(DIRECTORY):
@@ -183,3 +185,12 @@ with tf.Session() as sess:
 			for j in range(dataloader.numClasses):
 				print("%6d"%mixMatrix[i][j],end="", file=f)
 			print(file=f)
+	if DRAW:
+		trainProcess.draw()
+		trainProcess.drawLoss()
+		trainProcess.drawAcc()
+		probMap.drawProbMap()
+		probMap.drawGt()
+		probMap.drawPredictedMap()
+		probMap.drawTrainMap()
+		probMap.drawTestMap()

@@ -68,8 +68,7 @@ class TrainProcess:
 
 		plt.legend(handles=[l1, l2, l3, l4], loc="center right")
 		sv = plt.gcf()
-		sv.savefig(os.path.join(self.imgDir,"trainAndTest.eps"),format="eps",dpi=300)
-		# plt.show()
+		sv.savefig(os.path.join(self.imgDir,"lossAndAcc.eps"),format="eps",dpi=300)
 
 	def drawLoss(self):
 		plt.figure()
@@ -78,7 +77,8 @@ class TrainProcess:
 		plt.scatter(x, self.trainLoss, label="train loss", alpha=0.5)
 		plt.scatter(x, self.testLoss, label="test loss", alpha=0.5)
 		plt.legend()
-		plt.show()
+		sv = plt.gcf()
+		sv.savefig(os.path.join(self.imgDir, "loss.eps"), format="eps", dpi=300)
 
 	def drawAcc(self):
 		plt.figure()
@@ -87,7 +87,8 @@ class TrainProcess:
 		plt.scatter(x, self.trainAcc, label="train loss", alpha=0.5)
 		plt.scatter(x, self.testAcc, label="test loss", alpha=0.5)
 		plt.legend()
-		plt.show()
+		sv = plt.gcf()
+		sv.savefig(os.path.join(self.imgDir, "acc.eps"), format="eps", dpi=300)
 
 
 class ProbMap:
@@ -100,6 +101,7 @@ class ProbMap:
 		self.width = width
 		self.groundTruth = np.argmax(self.groundTruth, axis=1)
 		self.trainIndex = trainIndex
+		self.imgDir = os.path.join(path, "img")
 
 	def addData(self, data):
 		self.map = np.concatenate((self.map, data), axis=0)
@@ -127,8 +129,8 @@ class ProbMap:
 				pbar.update()
 
 		plt.imshow(groundTruth, cmap="Set1_r")
-		plt.colorbar()
-		plt.show()
+		sv = plt.gcf()
+		sv.savefig(os.path.join(self.imgDir, "gt.eps"), format="eps", dpi=300)
 
 	def drawPredictedMap(self):
 		pred = np.argmax(self.map, axis=1)
@@ -145,8 +147,8 @@ class ProbMap:
 				pbar.update()
 
 		plt.imshow(probMap, cmap=cmap)
-		plt.colorbar()
-		plt.show()
+		sv = plt.gcf()
+		sv.savefig(os.path.join(self.imgDir, "predictMap.eps"), format="eps", dpi=300)
 
 	def drawProbMap3D(self):
 		pred = np.argmax(self.map, axis=1)
@@ -177,8 +179,8 @@ class ProbMap:
 			probMap[h][w] += self.map[i][self.groundTruth[i]]
 
 		plt.imshow(probMap)
-		plt.colorbar()
-		plt.show()
+		sv = plt.gcf()
+		sv.savefig(os.path.join(self.imgDir, "probMap.eps"), format="eps", dpi=300)
 
 	def drawTrainMap(self):
 		groundTruth = np.zeros(shape=(self.height, self.width))
@@ -203,8 +205,8 @@ class ProbMap:
 				trainMap[i][j] *= groundTruth[i][j]
 
 		plt.imshow(trainMap)
-		plt.colorbar()
-		plt.show()
+		sv = plt.gcf()
+		sv.savefig(os.path.join(self.imgDir, "trainMap.eps"), format="eps", dpi=300)
 
 	def drawTestMap(self):
 		groundTruth = np.zeros(shape=(self.height, self.width))
@@ -229,8 +231,8 @@ class ProbMap:
 				testMap[i][j] *= groundTruth[i][j]
 
 		plt.imshow(testMap)
-		plt.colorbar()
-		plt.show()
+		sv = plt.gcf()
+		sv.savefig(os.path.join(self.imgDir, "testMap.eps"), format="eps", dpi=300)
 
 
 if __name__ == "__main__":
