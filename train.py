@@ -171,6 +171,7 @@ with tf.Session() as sess:
 	mixMatrix = calMixMatrix(probMap.map, allLabeledLabel)
 
 	with open(os.path.join(dataSavePath, "summary.txt"), "w+") as f:
+		print(args,file=f)
 		print("OA: %4f, AA: %4f, KAPPA: %4f" % (OA, AA, kappa), file=f)
 		print("******* MIX MAP *******", file=f)
 		print("   |", end="",file=f)
