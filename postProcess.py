@@ -59,7 +59,6 @@ class TrainProcess:
 		kwargs = {
 			"marker": None,
 			"lw": 2,
-			"alpha": 1
 		}
 		l1, = ax1.plot(x, self.trainLoss, color="tab:blue", label="train loss", **kwargs)
 		l2, = ax2.plot(x, self.trainAcc, color="tab:orange", label="train accuracy", **kwargs)
