@@ -119,6 +119,7 @@ class ProbMap:
 		self.map = pickle.load(f)
 
 	def drawGt(self):
+		plt.figure()
 		groundTruth = np.zeros(shape=(self.height, self.width))
 		cmap = mpl.colors.ListedColormap(
 			["black", "snow", "red", "tomato", "chocolate", "orange", "wheat", "gold", "yellow", "chartreuse",
@@ -136,6 +137,7 @@ class ProbMap:
 		sv.savefig(os.path.join(self.imgDir, "gt.eps"), format="eps", dpi=300)
 
 	def drawPredictedMap(self):
+		plt.figure()
 		pred = np.argmax(self.map, axis=1)
 		probMap = np.zeros(shape=(self.height, self.width))
 		cmap = mpl.colors.ListedColormap(
@@ -154,6 +156,7 @@ class ProbMap:
 		sv.savefig(os.path.join(self.imgDir, "predictMap.eps"), format="eps", dpi=300)
 
 	def drawProbMap3D(self):
+		plt.figure()
 		pred = np.argmax(self.map, axis=1)
 		probMap = np.zeros(shape=(self.height, self.width))
 		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
@@ -174,6 +177,7 @@ class ProbMap:
 		plt.show()
 
 	def drawProbMap(self):
+		plt.figure()
 		probMap = np.zeros(shape=[self.height, self.width])
 		for i in range(np.shape(self.groundTruth)[0]):
 			index = self.index[i]
@@ -182,10 +186,12 @@ class ProbMap:
 			probMap[h][w] += self.map[i][self.groundTruth[i]]
 
 		plt.imshow(probMap)
+		plt.colorbar()
 		sv = plt.gcf()
 		sv.savefig(os.path.join(self.imgDir, "probMap.eps"), format="eps", dpi=300)
 
 	def drawTrainMap(self):
+		plt.figure()
 		groundTruth = np.zeros(shape=(self.height, self.width))
 		cmap = mpl.colors.ListedColormap(
 			["black", "snow", "red", "tomato", "chocolate", "orange", "wheat", "gold", "yellow", "chartreuse",
@@ -199,7 +205,6 @@ class ProbMap:
 				pbar.update()
 
 		trainMap = np.zeros(shape=[self.height, self.width])
-		# print(np.shape(self.groundTruth)[0])
 		for i in range(np.shape(self.trainIndex)[0]):
 			index = self.trainIndex[i]
 			h = index // self.height
@@ -215,6 +220,7 @@ class ProbMap:
 		sv.savefig(os.path.join(self.imgDir, "trainMap.eps"), format="eps", dpi=300)
 
 	def drawTestMap(self):
+		plt.figure()
 		groundTruth = np.zeros(shape=(self.height, self.width))
 		cmap = mpl.colors.ListedColormap(
 			["black", "snow", "red", "tomato", "chocolate", "orange", "wheat", "gold", "yellow", "chartreuse",
