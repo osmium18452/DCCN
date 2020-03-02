@@ -96,7 +96,7 @@ class ProbMap:
 		self.map = np.zeros((1, numClasses))
 		self.groundTruth = groundTruth
 		self.index = index
-		self.saveDir = path
+		self.dataDir = os.path.join(path, "data")
 		self.height = height
 		self.width = width
 		self.groundTruth = np.argmax(self.groundTruth, axis=1)
@@ -110,16 +110,19 @@ class ProbMap:
 		self.map = np.delete(self.map, (0), axis=0)
 
 	def save(self):
-		f = open(os.path.join(self.saveDir, "probmap.pkl"), "wb")
+		f = open(os.path.join(self.dataDir, "probmap.pkl"), "wb")
 		pickle.dump(self.map, file=f)
 		print("probmap saved!")
 
 	def restore(self):
-		f = open(os.path.join(self.saveDir, "probmap.pkl"), "rb")
+		f = open(os.path.join(self.dataDir, "probmap.pkl"), "rb")
 		self.map = pickle.load(f)
 
 	def drawGt(self):
 		groundTruth = np.zeros(shape=(self.height, self.width))
+		cmap = mpl.colors.ListedColormap(
+			["black", "snow", "red", "tomato", "chocolate", "orange", "wheat", "gold", "yellow", "chartreuse",
+			 " limegreen", "aquamarine", "cyan", "dodgerblue", "slateblue", "violet", "pink"])
 		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
@@ -128,7 +131,7 @@ class ProbMap:
 				groundTruth[h][w] += (self.groundTruth[i] + 1)
 				pbar.update()
 
-		plt.imshow(groundTruth, cmap="Set1_r")
+		plt.imshow(groundTruth, cmap=cmap)
 		sv = plt.gcf()
 		sv.savefig(os.path.join(self.imgDir, "gt.eps"), format="eps", dpi=300)
 
@@ -136,7 +139,7 @@ class ProbMap:
 		pred = np.argmax(self.map, axis=1)
 		probMap = np.zeros(shape=(self.height, self.width))
 		cmap = mpl.colors.ListedColormap(
-			["black", "snow", "red", "tomato", " chocolate", "orange", "wheat", "gold", "yellow", "chartreuse",
+			["black", "snow", "red", "tomato", "chocolate", "orange", "wheat", "gold", "yellow", "chartreuse",
 			 " limegreen", "aquamarine", "cyan", "dodgerblue", "slateblue", "violet", "pink"])
 		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
@@ -184,6 +187,9 @@ class ProbMap:
 
 	def drawTrainMap(self):
 		groundTruth = np.zeros(shape=(self.height, self.width))
+		cmap = mpl.colors.ListedColormap(
+			["black", "snow", "red", "tomato", "chocolate", "orange", "wheat", "gold", "yellow", "chartreuse",
+			 " limegreen", "aquamarine", "cyan", "dodgerblue", "slateblue", "violet", "pink"])
 		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
@@ -204,12 +210,15 @@ class ProbMap:
 			for j in range(self.width):
 				trainMap[i][j] *= groundTruth[i][j]
 
-		plt.imshow(trainMap)
+		plt.imshow(trainMap,cmap=cmap)
 		sv = plt.gcf()
 		sv.savefig(os.path.join(self.imgDir, "trainMap.eps"), format="eps", dpi=300)
 
 	def drawTestMap(self):
 		groundTruth = np.zeros(shape=(self.height, self.width))
+		cmap = mpl.colors.ListedColormap(
+			["black", "snow", "red", "tomato", "chocolate", "orange", "wheat", "gold", "yellow", "chartreuse",
+			 " limegreen", "aquamarine", "cyan", "dodgerblue", "slateblue", "violet", "pink"])
 		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
@@ -230,7 +239,7 @@ class ProbMap:
 			for j in range(self.width):
 				testMap[i][j] *= groundTruth[i][j]
 
-		plt.imshow(testMap)
+		plt.imshow(testMap,cmap=cmap)
 		sv = plt.gcf()
 		sv.savefig(os.path.join(self.imgDir, "testMap.eps"), format="eps", dpi=300)
 

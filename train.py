@@ -141,7 +141,7 @@ with tf.Session() as sess:
 	if USE_BEST_MODEL:
 		saver.restore(sess, modelSavePath)
 	iter = dataloader.allLabeledNum // BATCH_SIZE
-	probMap = ProbMap(dataloader.numClasses, dataSavePath, allLabeledLabel, allLabeledIndex, dataloader.height,
+	probMap = ProbMap(dataloader.numClasses, DIRECTORY, allLabeledLabel, allLabeledIndex, dataloader.height,
 					  dataloader.width, dataloader.trainIndex)
 	with tqdm(total=iter, desc="predicting...",ascii=TQDM_ASCII) as pbar:
 		for i in range(iter):
