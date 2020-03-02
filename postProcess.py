@@ -59,7 +59,7 @@ class TrainProcess:
 		kwargs = {
 			"marker": None,
 			"lw": 2,
-			"alpha": 0.9
+			"alpha": 1
 		}
 		l1, = ax1.plot(x, self.trainLoss, color="tab:blue", label="train loss", **kwargs)
 		l2, = ax2.plot(x, self.trainAcc, color="tab:orange", label="train accuracy", **kwargs)
@@ -74,8 +74,8 @@ class TrainProcess:
 		plt.figure()
 		x = range(len(self.trainLoss))
 		plt.title("Loss of training and testing")
-		plt.scatter(x, self.trainLoss, label="train loss", alpha=0.5)
-		plt.scatter(x, self.testLoss, label="test loss", alpha=0.5)
+		plt.scatter(x, self.trainLoss, label="train loss")
+		plt.scatter(x, self.testLoss, label="test loss")
 		plt.legend()
 		sv = plt.gcf()
 		sv.savefig(os.path.join(self.imgDir, "loss.eps"), format="eps", dpi=300)
@@ -84,8 +84,8 @@ class TrainProcess:
 		plt.figure()
 		x = range(len(self.trainAcc))
 		plt.title("Loss of training and testing")
-		plt.scatter(x, self.trainAcc, label="train loss", alpha=0.5)
-		plt.scatter(x, self.testAcc, label="test loss", alpha=0.5)
+		plt.scatter(x, self.trainAcc, label="train loss")
+		plt.scatter(x, self.testAcc, label="test loss")
 		plt.legend()
 		sv = plt.gcf()
 		sv.savefig(os.path.join(self.imgDir, "acc.eps"), format="eps", dpi=300)
