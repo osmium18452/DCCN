@@ -1,7 +1,7 @@
 import numpy as np
 import scipy.io
 from tqdm import tqdm
-from utils import convertToOneHot, LENGTH
+from utils import convertToOneHot, LENGTH, TQDM_ASCII
 import random
 import scipy.ndimage
 
@@ -89,7 +89,7 @@ class DataLoader:
 		for iter, i in enumerate(unique):
 			lut[i] = iter
 		self.label = lut[self.label]
-		with tqdm(total=self.height * self.width, desc="slicing ", ncols=LENGTH) as pbar:
+		with tqdm(total=self.height * self.width, desc="slicing ", ncols=LENGTH, ascii=TQDM_ASCII) as pbar:
 			for i in range(self.height):
 				for j in range(self.width):
 					tmpLabel = self.label[i, j]
@@ -109,7 +109,7 @@ class DataLoader:
 
 	def __prepareDataByRatio(self, ratio):
 		np.random.seed(0)
-		with tqdm(total=self.numClasses, desc="dividing", ncols=LENGTH) as pbar:
+		with tqdm(total=self.numClasses, desc="dividing", ncols=LENGTH, ascii=TQDM_ASCII) as pbar:
 			for i in range(self.numClasses):
 				label = i
 				index = np.random.choice(self.numEachClass[label], int((self.numEachClass[label]) * ratio + 0.5),
@@ -130,7 +130,7 @@ class DataLoader:
 
 	def __prepareDataByNum(self, num):
 		np.random.seed(0)
-		with tqdm(total=self.numClasses, desc="dividing patches", ncols=LENGTH) as pbar:
+		with tqdm(total=self.numClasses, desc="dividing patches", ncols=LENGTH, ascii=TQDM_ASCII) as pbar:
 			for i in range(self.numClasses):
 				label = i
 				index = np.random.choice(self.numEachClass[label], int(num), replace=False)
@@ -149,7 +149,7 @@ class DataLoader:
 
 	def dataAugment(self, times):
 		trainNums = self.trainNum
-		with tqdm(total=int((times - 1) * trainNums), desc="augmenting", ncols=LENGTH) as pbar:
+		with tqdm(total=int((times - 1) * trainNums), desc="augmenting", ncols=LENGTH, ascii=TQDM_ASCII) as pbar:
 			for i in range(int(times - 1)):
 				for k in range(trainNums):
 					j = random.randint(0, trainNums - 1)
@@ -181,7 +181,7 @@ class DataLoader:
 		lrPatch, lrLabel, lrSpectrum = [], [], []
 		noisePatch, noiseLabel, noiseSpectrum = [], [], []
 		# angelPatch, angelLabel, angelSpectrum = [], [], []
-		with tqdm(total=len(index), desc="augmenting", ncols=LENGTH) as pbar:
+		with tqdm(total=len(index), desc="augmenting", ncols=LENGTH, ascii=TQDM_ASCII) as pbar:
 			for i in index:
 				udPatch.append(np.flipud(self.trainPatch[i]))
 				udSpectrum.append(self.trainSpectrum[i])

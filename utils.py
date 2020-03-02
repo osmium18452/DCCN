@@ -1,6 +1,8 @@
 import numpy as np
+import platform
 
 LENGTH = None
+TQDM_ASCII=(platform.system()=="Windows")
 
 
 def convertToOneHot(vector, num_classes=None):

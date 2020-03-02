@@ -6,7 +6,7 @@ import os
 import argparse
 from dataloader import DataLoader
 from model import DCCapsNet, CapsNet
-from utils import LENGTH, calOA, selectData, calMixMatrix, calAA, calKappa
+from utils import LENGTH, calOA, selectData, calMixMatrix, calAA, calKappa ,TQDM_ASCII
 from postProcess import TrainProcess, ProbMap
 
 parser = argparse.ArgumentParser()
@@ -96,7 +96,7 @@ with tf.Session() as sess:
 				trainLabel = trainLabel[permutation, :]
 
 			iter = dataloader.trainNum // BATCH_SIZE
-			with tqdm(total=iter, desc="epoch %3d/%3d" % (epoch + 1,EPOCHS), ncols=LENGTH) as pbar:
+			with tqdm(total=iter, desc="epoch %3d/%3d" % (epoch + 1,EPOCHS), ncols=LENGTH,ascii=TQDM_ASCII) as pbar:
 				for i in range(iter):
 					batch_w = trainSpectrum[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :]
 					batch_x = trainPatch[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :, :]
@@ -141,7 +141,7 @@ with tf.Session() as sess:
 	iter = dataloader.allLabeledNum // BATCH_SIZE
 	probMap = ProbMap(dataloader.numClasses, dataSavePath, allLabeledLabel, allLabeledIndex, dataloader.height,
 					  dataloader.width, dataloader.trainIndex)
-	with tqdm(total=iter, desc="predicting...") as pbar:
+	with tqdm(total=iter, desc="predicting...",ascii=TQDM_ASCII) as pbar:
 		for i in range(iter):
 			batch_w = allLabeledSpectrum[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :]
 			batch_x = allLabeledPatch[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :, :]

@@ -6,6 +6,7 @@ from dataloader import DataLoader
 from tqdm import tqdm
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib as mpl
+from utils import TQDM_ASCII
 
 
 class TrainProcess:
@@ -117,7 +118,7 @@ class ProbMap:
 
 	def drawGt(self):
 		groundTruth = np.zeros(shape=(self.height, self.width))
-		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt") as pbar:
+		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
 				h = index // self.height
@@ -135,7 +136,7 @@ class ProbMap:
 		cmap = mpl.colors.ListedColormap(
 			["black", "snow", "red", "tomato", " chocolate", "orange", "wheat", "gold", "yellow", "chartreuse",
 			 " limegreen", "aquamarine", "cyan", "dodgerblue", "slateblue", "violet", "pink"])
-		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt") as pbar:
+		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
 				h = index // self.height
@@ -150,7 +151,7 @@ class ProbMap:
 	def drawProbMap3D(self):
 		pred = np.argmax(self.map, axis=1)
 		probMap = np.zeros(shape=(self.height, self.width))
-		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt") as pbar:
+		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
 				h = index // self.height
@@ -181,7 +182,7 @@ class ProbMap:
 
 	def drawTrainMap(self):
 		groundTruth = np.zeros(shape=(self.height, self.width))
-		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt") as pbar:
+		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
 				h = index // self.height
@@ -207,7 +208,7 @@ class ProbMap:
 
 	def drawTestMap(self):
 		groundTruth = np.zeros(shape=(self.height, self.width))
-		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt") as pbar:
+		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
 				h = index // self.height
