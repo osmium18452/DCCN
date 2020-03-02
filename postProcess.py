@@ -122,7 +122,7 @@ class ProbMap:
 		groundTruth = np.zeros(shape=(self.height, self.width))
 		cmap = mpl.colors.ListedColormap(
 			["black", "snow", "red", "tomato", "chocolate", "orange", "wheat", "gold", "yellow", "chartreuse",
-			 " limegreen", "aquamarine", "cyan", "dodgerblue", "slateblue", "violet", "pink"])
+			 "limegreen", "aquamarine", "cyan", "dodgerblue", "slateblue", "violet", "pink"])
 		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
@@ -140,7 +140,7 @@ class ProbMap:
 		probMap = np.zeros(shape=(self.height, self.width))
 		cmap = mpl.colors.ListedColormap(
 			["black", "snow", "red", "tomato", "chocolate", "orange", "wheat", "gold", "yellow", "chartreuse",
-			 " limegreen", "aquamarine", "cyan", "dodgerblue", "slateblue", "violet", "pink"])
+			 "limegreen", "aquamarine", "cyan", "dodgerblue", "slateblue", "violet", "pink"])
 		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
@@ -189,7 +189,7 @@ class ProbMap:
 		groundTruth = np.zeros(shape=(self.height, self.width))
 		cmap = mpl.colors.ListedColormap(
 			["black", "snow", "red", "tomato", "chocolate", "orange", "wheat", "gold", "yellow", "chartreuse",
-			 " limegreen", "aquamarine", "cyan", "dodgerblue", "slateblue", "violet", "pink"])
+			 "limegreen", "aquamarine", "cyan", "dodgerblue", "slateblue", "violet", "pink"])
 		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
@@ -218,7 +218,7 @@ class ProbMap:
 		groundTruth = np.zeros(shape=(self.height, self.width))
 		cmap = mpl.colors.ListedColormap(
 			["black", "snow", "red", "tomato", "chocolate", "orange", "wheat", "gold", "yellow", "chartreuse",
-			 " limegreen", "aquamarine", "cyan", "dodgerblue", "slateblue", "violet", "pink"])
+			 "limegreen", "aquamarine", "cyan", "dodgerblue", "slateblue", "violet", "pink"])
 		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
