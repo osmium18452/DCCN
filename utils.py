@@ -77,7 +77,7 @@ def calKappa(probMap, groundTruth):
 def calMixMatrix(probMap, groundTruth):
 	pred = np.argmax(probMap, axis=1)
 	groundTruth = np.argmax(groundTruth, axis=1)
-	numClasses = len(pred)
+	numClasses = len(np.unique(groundTruth))
 	mixMatrix = np.zeros(shape=[numClasses, numClasses], dtype=int)
 	for i in range(len(pred)):
 		mixMatrix[pred[i]][groundTruth[i]] += 1
