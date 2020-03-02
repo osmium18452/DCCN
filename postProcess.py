@@ -49,7 +49,7 @@ class TrainProcess:
 	def draw(self):
 		plt.figure(figsize=(8, 4.5))
 		ax1 = plt.subplot()
-		plt.title("training and testing")
+		plt.title("loss and accuracy of training and testing")
 		ax1.set_xlabel("epochs")
 		x = range(len(self.trainLoss))
 		ax1.set_ylabel("loss")
@@ -73,8 +73,8 @@ class TrainProcess:
 		plt.figure()
 		x = range(len(self.trainLoss))
 		plt.title("Loss of training and testing")
-		plt.scatter(x, self.trainLoss, label="train loss")
-		plt.scatter(x, self.testLoss, label="test loss")
+		plt.plot(x, self.trainLoss, label="train loss")
+		plt.plot(x, self.testLoss, label="test loss")
 		plt.legend()
 		sv = plt.gcf()
 		sv.savefig(os.path.join(self.imgDir, "loss.eps"), format="eps", dpi=300)
@@ -82,7 +82,7 @@ class TrainProcess:
 	def drawAcc(self):
 		plt.figure()
 		x = range(len(self.trainAcc))
-		plt.title("Loss of training and testing")
+		plt.title("accuracy of training and testing")
 		plt.scatter(x, self.trainAcc, label="train loss")
 		plt.scatter(x, self.testAcc, label="test loss")
 		plt.legend()
