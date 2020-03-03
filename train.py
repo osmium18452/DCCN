@@ -20,12 +20,15 @@ parser.add_argument("-p", "--patch_size", default=9, type=int)
 parser.add_argument("-m", "--model", default=1, type=int)
 parser.add_argument("-d", "--directory", default="./save/default")
 parser.add_argument("--model_path", default="./save/default/model")
+parser.add_argument("--drop", default=1, type=float)
+parser.add_argument("--data", default=0, type=int)
+parser.add_argument("--first_layer",default=6,type=int)
+parser.add_argument("--second_layer",default=8,type=int)
 parser.add_argument("--predict_only", action="store_true")
 parser.add_argument("--restore", action="store_true")
 parser.add_argument("--use_best_model", action="store_true")
+parser.add_argument("--dont_save_data", action="store_true")
 parser.add_argument("--draw",action="store_true")
-parser.add_argument("--drop", default=1, type=float)
-parser.add_argument("--data", default=0, type=int)
 args = parser.parse_args()
 print(args)
 
@@ -42,7 +45,9 @@ RESTORE = args.restore
 PREDICT_ONLY = args.predict_only
 MODEL_DIRECTORY = args.model_path
 USE_BEST_MODEL = args.use_best_model
+DONT_SAVE_DATA=args.dont_save_data
 DRAW=args.draw
+FIRST_LAYER,SECOND_LAYER=args.first_layer,args.second_layer
 
 os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
 if not os.path.exists(DIRECTORY):
@@ -67,7 +72,7 @@ y = tf.placeholder(shape=[None, dataloader.numClasses], dtype=tf.float32)
 k = tf.placeholder(dtype=tf.float32)
 
 if args.model == 1:
-	pred = DCCapsNet(x, w, k, dataloader.numClasses)
+	pred = DCCapsNet(x, w, k, dataloader.numClasses, FIRST_LAYER, SECOND_LAYER)
 	print("USING DCCAPS***************************************")
 else:
 	pred = CapsNet(x, dataloader.numClasses)
@@ -161,9 +166,11 @@ with tf.Session() as sess:
 
 	probMap.finish()
 	print(np.shape(probMap.map))
-	if not PREDICT_ONLY:
-		trainProcess.save()
-	probMap.save()
+
+	if not DONT_SAVE_DATA:
+		if not PREDICT_ONLY:
+			trainProcess.save()
+		probMap.save()
 
 	OA = calOA(probMap.map, allLabeledLabel)
 	AA = calAA(probMap.map, allLabeledLabel)

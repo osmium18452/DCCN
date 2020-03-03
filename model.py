@@ -3,9 +3,7 @@ import capslayer as cl
 import numpy as np
 
 
-def DCCapsNet(patch, spectrum, k, output):
-	firstDimension=6
-	secondDimension=8
+def DCCapsNet(patch, spectrum, k, output, firstDimension=6,secondDimension=8):
 	pt = tf.layers.conv2d(
 		patch,
 		filters=50,
