@@ -1,12 +1,3 @@
-python .\train.py --data 1 -e 50 -r 30 -a 2 -l 0.0001 -m 1 --draw -d .\save\data\mar3\DCCN\id --model_path .\save\model\mar3\DCCN\id -g 1
-python .\train.py --data 2 -e 50 -r 30 -a 2 -l 0.0001 -m 1 --draw -d .\save\data\mar3\DCCN\pu --model_path .\save\model\mar3\DCCN\pu -g 1
-python .\train.py --data 3 -e 50 -r 30 -a 2 -l 0.0001 -m 1 --draw -d .\save\data\mar3\DCCN\pc --model_path .\save\model\mar3\DCCN\pc -g 1
-python .\train.py --data 4 -e 50 -r 30 -a 2 -l 0.0001 -m 1 --draw -d .\save\data\mar3\DCCN\sl --model_path .\save\model\mar3\DCCN\sl -g 1
-python .\train.py --data 5 -e 50 -r 30 -a 2 -l 0.0001 -m 1 --draw -d .\save\data\mar3\DCCN\SA --model_path .\save\model\mar3\DCCN\SA -g 1
-python .\train.py --data 6 -e 50 -r 30 -a 2 -l 0.0001 -m 1 --draw -d .\save\data\mar3\DCCN\KS --model_path .\save\model\mar3\DCCN\KS -g 1
-python .\train.py --data 1 -e 50 -r 30 -a 2 -l 0.0001 -m 2 --draw -d .\save\data\mar3\Caps\id --model_path .\save\model\mar3\Caps\id -g 1
-python .\train.py --data 2 -e 50 -r 30 -a 2 -l 0.0001 -m 2 --draw -d .\save\data\mar3\Caps\pu --model_path .\save\model\mar3\Caps\pu -g 1
-python .\train.py --data 3 -e 50 -r 30 -a 2 -l 0.0001 -m 2 --draw -d .\save\data\mar3\Caps\pc --model_path .\save\model\mar3\Caps\pc -g 1
-python .\train.py --data 4 -e 50 -r 30 -a 2 -l 0.0001 -m 2 --draw -d .\save\data\mar3\Caps\sl --model_path .\save\model\mar3\Caps\sl -g 1
-python .\train.py --data 5 -e 50 -r 30 -a 2 -l 0.0001 -m 2 --draw -d .\save\data\mar3\Caps\SA --model_path .\save\model\mar3\Caps\SA -g 1
-python .\train.py --data 6 -e 50 -r 30 -a 2 -l 0.0001 -m 2 --draw -d .\save\data\mar3\Caps\KS --model_path .\save\model\mar3\Caps\KS -g 1
+python ./train.py -g 0 --data 2 -e 5 -a 1 -l 0.0001 -p 7 -r 0.1 --first_layer 6 --second_layer 8 -d .\save\mar3-2\dccn --model_path .\save\mar3-2\model --dont_save_data --no_detailed_summary
+python ./train.py -g 0 --data 3 -e 5 -a 1 -l 0.0001 -p 7 -r 0.1 --first_layer 6 --second_layer 8 -d .\save\mar3-2\dccn --model_path .\save\mar3-2\model --dont_save_data --no_detailed_summary
+python ./train.py -g 0 --data 4 -e 5 -a 1 -l 0.0001 -p 7 -r 0.1 --first_layer 6 --second_layer 8 -d .\save\mar3-2\dccn --model_path .\save\mar3-2\model --dont_save_data --no_detailed_summary

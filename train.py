@@ -6,7 +6,7 @@ import os
 import argparse
 from dataloader import DataLoader
 from model import DCCapsNet, CapsNet
-from utils import LENGTH, calOA, selectData, calMixMatrix, calAA, calKappa ,TQDM_ASCII
+from utils import LENGTH, calOA, selectData, calMixMatrix, calAA, calKappa, TQDM_ASCII
 from postProcess import TrainProcess, ProbMap
 
 parser = argparse.ArgumentParser()
@@ -22,13 +22,14 @@ parser.add_argument("-d", "--directory", default="./save/default")
 parser.add_argument("--model_path", default="./save/default/model")
 parser.add_argument("--drop", default=1, type=float)
 parser.add_argument("--data", default=0, type=int)
-parser.add_argument("--first_layer",default=6,type=int)
-parser.add_argument("--second_layer",default=8,type=int)
+parser.add_argument("--first_layer", default=6, type=int)
+parser.add_argument("--second_layer", default=8, type=int)
 parser.add_argument("--predict_only", action="store_true")
 parser.add_argument("--restore", action="store_true")
 parser.add_argument("--use_best_model", action="store_true")
 parser.add_argument("--dont_save_data", action="store_true")
-parser.add_argument("--draw",action="store_true")
+parser.add_argument("--no_detailed_summary", action="store_true")
+parser.add_argument("--draw", action="store_true")
 args = parser.parse_args()
 print(args)
 
@@ -45,9 +46,10 @@ RESTORE = args.restore
 PREDICT_ONLY = args.predict_only
 MODEL_DIRECTORY = args.model_path
 USE_BEST_MODEL = args.use_best_model
-DONT_SAVE_DATA=args.dont_save_data
-DRAW=args.draw
-FIRST_LAYER,SECOND_LAYER=args.first_layer,args.second_layer
+DONT_SAVE_DATA = args.dont_save_data
+NO_DETAILED_SUMMARY=args.no_detailed_summary
+DRAW = args.draw
+FIRST_LAYER, SECOND_LAYER = args.first_layer, args.second_layer
 
 os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
 if not os.path.exists(DIRECTORY):
@@ -103,7 +105,7 @@ with tf.Session() as sess:
 				trainLabel = trainLabel[permutation, :]
 
 			iter = dataloader.trainNum // BATCH_SIZE
-			with tqdm(total=iter, desc="epoch %3d/%3d" % (epoch + 1,EPOCHS), ncols=LENGTH,ascii=TQDM_ASCII) as pbar:
+			with tqdm(total=iter, desc="epoch %3d/%3d" % (epoch + 1, EPOCHS), ncols=LENGTH, ascii=TQDM_ASCII) as pbar:
 				for i in range(iter):
 					batch_w = trainSpectrum[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :]
 					batch_x = trainPatch[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :, :]
@@ -148,7 +150,7 @@ with tf.Session() as sess:
 	iter = dataloader.allLabeledNum // BATCH_SIZE
 	probMap = ProbMap(dataloader.numClasses, DIRECTORY, allLabeledLabel, allLabeledIndex, dataloader.height,
 					  dataloader.width, dataloader.trainIndex)
-	with tqdm(total=iter, desc="predicting...",ascii=TQDM_ASCII) as pbar:
+	with tqdm(total=iter, desc="predicting...", ascii=TQDM_ASCII) as pbar:
 		for i in range(iter):
 			batch_w = allLabeledSpectrum[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :]
 			batch_x = allLabeledPatch[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :, :]
@@ -177,22 +179,28 @@ with tf.Session() as sess:
 	kappa = calKappa(probMap.map, allLabeledLabel)
 	mixMatrix = calMixMatrix(probMap.map, allLabeledLabel)
 
-	with open(os.path.join(dataSavePath, "summary.txt"), "w+") as f:
-		print(args,file=f)
-		print("OA: %4f, AA: %4f, KAPPA: %4f" % (OA, AA, kappa), file=f)
-		print("******* MIX MAP *******", file=f)
-		print("   |", end="",file=f)
-		for i in range(dataloader.numClasses):
-			print("%6d"%i,end="", file=f)
-		print(file=f)
-		for i in range(6*dataloader.numClasses+4):
-			print("-",end="", file=f)
-		print(file=f)
-		for i in range(dataloader.numClasses):
-			print("%2d"%i,end=" |", file=f)
-			for j in range(dataloader.numClasses):
-				print("%6d"%mixMatrix[i][j],end="", file=f)
+	if NO_DETAILED_SUMMARY:
+		with open(os.path.join(dataSavePath, "sum.txt"), "w+") as f:
+			print("first layer: %2d, second layer:%2d, epochs:%3d, data:%d, oa: %4f, aa:%4f, kappa:%4f" %\
+				  (FIRST_LAYER, SECOND_LAYER, EPOCHS, DATA, OA, AA, kappa))
+	else:
+		with open(os.path.join(dataSavePath, "summary.txt"), "w+") as f:
+			print(args, file=f)
+			print("OA: %4f, AA: %4f, KAPPA: %4f" % (OA, AA, kappa), file=f)
+			print("******* MIX MAP *******", file=f)
+			print("   |", end="", file=f)
+			for i in range(dataloader.numClasses):
+				print("%6d" % i, end="", file=f)
 			print(file=f)
+			for i in range(6 * dataloader.numClasses + 4):
+				print("-", end="", file=f)
+			print(file=f)
+			for i in range(dataloader.numClasses):
+				print("%2d" % i, end=" |", file=f)
+				for j in range(dataloader.numClasses):
+					print("%6d" % mixMatrix[i][j], end="", file=f)
+				print(file=f)
+
 	if DRAW:
 		trainProcess.draw()
 		trainProcess.drawLoss()
