@@ -180,9 +180,9 @@ with tf.Session() as sess:
 	mixMatrix = calMixMatrix(probMap.map, allLabeledLabel)
 
 	if NO_DETAILED_SUMMARY:
-		with open(os.path.join(dataSavePath, "sum.txt"), "w+") as f:
+		with open(os.path.join(dataSavePath, "sum.txt"), "a+") as f:
 			print("first layer: %2d, second layer:%2d, epochs:%3d, data:%d, oa: %4f, aa:%4f, kappa:%4f" %\
-				  (FIRST_LAYER, SECOND_LAYER, EPOCHS, DATA, OA, AA, kappa))
+				  (FIRST_LAYER, SECOND_LAYER, EPOCHS, DATA, OA, AA, kappa),file=f)
 	else:
 		with open(os.path.join(dataSavePath, "summary.txt"), "w+") as f:
 			print(args, file=f)
