@@ -4,6 +4,8 @@ import numpy as np
 
 
 def DCCapsNet(patch, spectrum, k, output):
+	firstDimension=6
+	secondDimension=8
 	pt = tf.layers.conv2d(
 		patch,
 		filters=50,
@@ -19,13 +21,13 @@ def DCCapsNet(patch, spectrum, k, output):
 		filters=64,
 		kernel_size=3,
 		strides=1,
-		out_caps_dims=[6, 1],
+		out_caps_dims=[firstDimension, 1],
 		method="logistic",
 		name="pt"
 	)
 
 	ptNumInput = np.prod(cl.shape(pt)[1:4])
-	pt = tf.reshape(pt, shape=[-1, ptNumInput, 6, 1])
+	pt = tf.reshape(pt, shape=[-1, ptNumInput, firstDimension, 1])
 	ptAct = tf.reshape(ptAct, shape=[-1, ptNumInput])
 
 	sp = tf.layers.conv1d(spectrum, filters=30, kernel_size=7, strides=1, padding="valid", activation=tf.nn.relu)
@@ -38,13 +40,13 @@ def DCCapsNet(patch, spectrum, k, output):
 		filters=64,
 		kernel_size=(3, 1),
 		strides=1,
-		out_caps_dims=[6, 1],
+		out_caps_dims=[firstDimension, 1],
 		method="logistic",
 		name="sp"
 	)
 
 	spNumInput = np.prod(cl.shape(sp)[1:4])
-	sp = tf.reshape(sp, shape=[-1, spNumInput, 6, 1])
+	sp = tf.reshape(sp, shape=[-1, spNumInput, firstDimension, 1])
 	spAct = tf.reshape(spAct, shape=[-1, spNumInput])
 
 	net = tf.concat([pt, sp], 1)
@@ -53,7 +55,7 @@ def DCCapsNet(patch, spectrum, k, output):
 	net, act = cl.layers.dense(
 		net, act,
 		num_outputs=output,
-		out_caps_dims=[8, 1],
+		out_caps_dims=[secondDimension, 1],
 		routing_method="DynamicRouting"
 	)
 	return act
