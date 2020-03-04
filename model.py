@@ -28,7 +28,7 @@ def DCCapsNet(patch, spectrum, k, output, firstDimension=6,secondDimension=8):
 	pt = tf.reshape(pt, shape=[-1, ptNumInput, firstDimension, 1])
 	ptAct = tf.reshape(ptAct, shape=[-1, ptNumInput])
 
-	sp = tf.layers.conv1d(spectrum, filters=30, kernel_size=7, strides=1, padding="valid", activation=tf.nn.relu)
+	sp = tf.layers.conv1d(spectrum, filters=30, kernel_size=32, strides=8, padding="valid", activation=tf.nn.relu)
 	sp = tf.nn.dropout(sp, k)
 
 	sp = tf.reshape(sp, [-1, sp.shape[1], 1, sp.shape[2]])
