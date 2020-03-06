@@ -62,7 +62,7 @@ def DCCapsNet(patch, spectrum, k, output, firstDimension=6,secondDimension=8):
 def CapsNet(net, output):
 	conv1 = tf.layers.conv2d(
 		net,
-		filters=50,
+		filters=64,
 		kernel_size=3,
 		strides=1,
 		padding="same",
@@ -75,19 +75,19 @@ def CapsNet(net, output):
 		filters=64,
 		kernel_size=3,
 		strides=1,
-		out_caps_dims=[6, 1],
+		out_caps_dims=[8, 1],
 		method="logistic"
 	)
 
 	n_input = np.prod(cl.shape(convCaps)[1:4])
-	convCaps = tf.reshape(convCaps, shape=[-1, n_input, 6, 1])
+	convCaps = tf.reshape(convCaps, shape=[-1, n_input, 8, 1])
 	activation = tf.reshape(activation, shape=[-1, n_input])
 
 	rt_poses, rt_probs = cl.layers.dense(
 		convCaps,
 		activation,
 		num_outputs=output,
-		out_caps_dims=[8, 1],
+		out_caps_dims=[16, 1],
 		routing_method="DynamicRouting"
 	)
 	return rt_probs
