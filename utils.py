@@ -136,12 +136,12 @@ def selectData(DATA=1):
 		print("using KSC**************************")
 	else:
 		pathName = []
-		pathName.append("./data/Indian_pines.mat")
-		pathName.append("./data/Indian_pines_gt.mat")
+		pathName.append("data/Botswana.mat")
+		pathName.append("data/Botswana_gt.mat")
 		matName = []
-		matName.append("indian_pines")
-		matName.append("indian_pines_gt")
-		print("using indian pines**************************")
+		matName.append("Botswana")
+		matName.append("Botswana_gt")
+		print("using botswana**************************")
 
 	return pathName, matName
 
