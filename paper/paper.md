@@ -1,4 +1,4 @@
-# Hyper-spectral Image Classification Using Dual-Channel Capsule Networks
+# Spectral-Spatial Hyper-spectral Image Classification Using Dual-Channel Capsule Networks
 
 ## ABSTRACT
 
