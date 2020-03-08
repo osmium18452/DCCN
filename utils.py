@@ -88,10 +88,10 @@ def calMixMatrix(probMap, groundTruth):
 def selectData(DATA=1):
 	if DATA == 1:
 		pathName = []
-		pathName.append("./data/Indian_pines_corrected.mat")
+		pathName.append("./data/indian_pines_corrected.mat")
 		pathName.append("./data/Indian_pines_gt.mat")
 		matName = []
-		matName.append("indian_pines")
+		matName.append("indian_pines_corrected")
 		matName.append("indian_pines_gt")
 		print("using indian pines**************************")
 	elif DATA == 2:
