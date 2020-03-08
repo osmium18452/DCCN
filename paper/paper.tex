@@ -23,15 +23,26 @@
 	channels and then concatenates and feds the features into the capsule layer to classify each of the HSI pixels.
 	The model is trained and tested on \textbf{(2/3/4/5?)} real HSI dataset \textbf{(Pavia University, Pavia City,
 	Salinas Valley, Salinas A and KSC)} and achieved high accuracy.
-	We also compared our network with some of the state-of-art models and found our model was superior to those models.
+	We also compared our network with some of the state-of-art models and found our model outperformed these models.
+	Among these state-of-art models we also implemented the Capsule Network that has the same architecture as our
+	network except the spectral convolution channel, and we found the DCCN model was superior to it as well.
 
-	\textbf{Key words:} Dual-Channel Capsule Network, Hyper-Spectral Image, Image Classification.
+	\noindent \textbf{Key Words:} Dual-Channel Capsule Network, Hyper-Spectral Image, Image Classification.
 
 
 	\section{INTRODUCTION}\label{sec:introduction}
 
+	The remainder of the paper is organized as follows.
+	In section~\ref{sec:related-works}, we introduce some related work of our paper.
+	In section~\ref{sec:proposed-method}, we describe the structure of our proposed network, how we pre-process the data and how
+	to train the network.
+	In section~\ref{sec:experiment}, we present and analyze the result of out experiment.
+	In section~\ref{sec:discussion}, we further explore the potential of DCCN\@.
+	Finally, in section~\ref{sec:conclusion}, we  conclude this paper with some remarks and hints at plausible future research
+	lines.
 
-	\section{RELATED WORKS}\label{sec:related-works}
+
+	\section{RELATED WORK}\label{sec:related-works}
 
 	\subsection{Capsule Network}\label{subsec:capsule-network}
 
