@@ -1,12 +1,15 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{fullpage}
+\usepackage{graphicx}
 
 \title{Spectral-Spatial Hyper-spectral Image Classification Using Dual-Channel Capsule Networks}
 \author{liu wenbo}
 \date{March 2020}
 
+
 \begin{document}
+	\bibliographystyle{IEEEtran}
 
 	\maketitle
 
@@ -19,7 +22,7 @@
 	in various classification tasks with its amazing performance.
 	In this paper, we proposed a new network architecture based on CapsNet for HSI classification tasks, called
 	Dual-channel Capsule Network (DCCN).
-	Our DCCN model extracts features from spectral and special domain respectively with two separate convolution
+	Our DCCN model extracts features from spectral and spatial domain respectively with two separate convolution
 	channels and then concatenates and feds the features into the capsule layer to classify each of the HSI pixels.
 	The model is trained and tested on \textbf{(2/3/4/5?)} real HSI dataset \textbf{(Pavia University, Pavia City,
 	Salinas Valley, Salinas A and KSC)} and achieved high accuracy.
@@ -31,6 +34,16 @@
 
 
 	\section{INTRODUCTION}\label{sec:introduction}
+	With technology developing, high resolution hyper-spectral images (HSI) became readily available.
+	Containing hundreds of spectral bands, HSI becomes a ideal method to further explore the earth's
+	surface\cite{du2013foreword,bioucas2013hyperspectral,shippert2003introduction}.
+	With a wealth of information, HSI has been applied in various fields, e.g.,
+	land cover classification\cite{yan2015urban},
+	object detection\cite{eslami2015developing},
+	forest inventory\cite{matsuki2015hyperspectral}
+	and water source management\cite{govender2007review}.
+	Therefore, HSI classification has become a quite significant problem to solve.
+	It aims at assigning a specific label to each pixel according to its spectral-spatial information\cite{wang2018scene}.
 
 	The remainder of the paper is organized as follows.
 	In section~\ref{sec:related-works}, we introduce some related work of our paper.
@@ -38,7 +51,7 @@
 	and how to train the network.
 	In section~\ref{sec:experiment}, we present and analyze the result of out experiment.
 	In section~\ref{sec:discussion}, we further explore the potential of DCCN\@.
-	Finally, in section~\ref{sec:conclusion}, we  conclude this paper with some remarks and hints at plausible future
+	Finally, in section~\ref{sec:conclusion}, we conclude this paper with some remarks and hints at plausible future
 	research lines.
 
 
@@ -51,9 +64,53 @@
 
 	\section{PROPOSED METHOD}\label{sec:proposed-method}
 
-	\subsection{Network Architecture}\label{subsec:network-architecture}
+	In this section, we introduce our proposed algorithm.
+	We first described how we pre-process the HSI data, then we \textbf{depicted} the network structure and finally we
+	introduced how to train the network.
 
 	\subsection{Data Pre-Process}\label{subsec:data-pre-process}
+
+	\subsection{Network Architecture}\label{subsec:network-architecture}
+	\begin{figure}[!ht]
+		\centering
+		\includegraphics[width=0.4\textwidth]{pic/lossAndAcc.eps}
+		\caption{Proposed network architecture.}
+		\label{netArct}
+	\end{figure}
+	Our proposed network architecture is showed in~\ref{netArct}.
+	As is shown, our Dual-Channel Capsule Network contains two convolution channel, i.e., a 2D convolution channel to
+	process the patch and a 1D convolution channel to process the spectrum, and a capsule channel.
+	As we can see, the Dual-Channel Capsule Network we adopted is a very shallow network, containing only six layers,
+	that is, a convolution layer append with a activation layer and a primary capsule layer in both of the spectral
+	channel and the spatial channel, two capsule layer in the fully connected capsule channel and a output layer to
+	process the output from the latter capsule layer.
+
+	To be specific, the detailed parameter of the DCCN deployed in our experiment are as follows.
+	For the spatial channel, the first layer is a 2D convolution layer, including 50 filters with the kernel size of
+	3$*$3 and stride of 1.
+	The following activation layer uses ReLU function as activation function.
+	The primary capsule layer uses 64 filters with kernel size of 3$*$3 and stride of 1.
+	Its output capsule's dimension is 8.
+	For the spectral channel, the first layer is a 1D convolution layer,including 30 filters with kernel size of 32 and
+	stride of 8.
+	The following activation layer used ReLU activation function as well.
+	The primary capsule layer uses 64 filters with kernel size of 3 and stride of 1.
+	Its output capsule's dimension is 8 so that it can be concatenated with the spatial channel's output capsules and
+	then fed into the fully connected capsule layer.
+%	TODO: the following 3 layer.
+
+	And here's how the data flows in the DCCN.
+	First, the sliced patch is fed into the 2D convolution channel to extract features spatially, and the spectrum
+	of the patch's center pixel is fed into the 1D convolution channel to extract features in spectral domain in
+	parallel.
+	Then, the extracted features, both spectral and spatial, are concatenated and fed into the capsule channel to output
+	the vectors (that is, the capsule) whose module represents the probability of a pixel being assigned a specific
+	label.
+	After that, the output layer will squash the 2D tensor (made up by capsules) into a 1D vector (Let's call it the
+	probability vector(prob-vector in short), since each of its elements represents the probability of a pixel should be
+	assigned to the according class) by calculating each of the capsule's module.
+	And finally, the output layer will assign a label to the pixel by performing argument-max ($argmax$) function to the
+	prob-vector.
 
 	\subsection{Train the Network}\label{subsec:train-the-network}
 
@@ -72,7 +129,8 @@
 	\subsection{Convergence analysis}\label{subsec:convergence}
 
 
-
 	\section{CONCLUSION}\label{sec:conclusion}
 
+
+	\bibliography{cite}
 \end{document}

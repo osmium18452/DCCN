@@ -70,7 +70,7 @@ class TrainProcess:
         sv.savefig(os.path.join(self.imgDir, "lossAndAcc.eps"), format="eps", dpi=300)
 
     def drawLoss(self):
-        plt.figure()
+        plt.figure(figsize=(8, 4.5))
         x = range(len(self.trainLoss))
         plt.title("Loss of training and testing")
         plt.plot(x, self.trainLoss, label="train loss")
@@ -80,7 +80,7 @@ class TrainProcess:
         sv.savefig(os.path.join(self.imgDir, "loss.eps"), format="eps", dpi=300)
 
     def drawAcc(self):
-        plt.figure()
+        plt.figure(figsize=(8, 4.5))
         x = range(len(self.trainAcc))
         plt.title("accuracy of training and testing")
         plt.plot(x, self.trainAcc, label="train loss")
