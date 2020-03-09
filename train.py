@@ -20,6 +20,7 @@ parser.add_argument("-p", "--patch_size", default=9, type=int)
 parser.add_argument("-m", "--model", default=1, type=int)
 parser.add_argument("-d", "--directory", default="./save/default")
 parser.add_argument("--model_path", default="./save/default/model")
+parser.add_argument("--sum_path",default="./save/default/sum")
 parser.add_argument("--drop", default=1, type=float)
 parser.add_argument("--data", default=0, type=int)
 parser.add_argument("--first_layer", default=6, type=int)
@@ -50,6 +51,7 @@ DONT_SAVE_DATA = args.dont_save_data
 NO_DETAILED_SUMMARY=args.no_detailed_summary
 DRAW = args.draw
 FIRST_LAYER, SECOND_LAYER = args.first_layer, args.second_layer
+SUM_PATH=args.sum_path
 
 os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
 if not os.path.exists(DIRECTORY):
@@ -57,9 +59,13 @@ if not os.path.exists(DIRECTORY):
 	os.makedirs(os.path.join(DIRECTORY, "data"))
 if not os.path.exists(MODEL_DIRECTORY):
 	os.makedirs(MODEL_DIRECTORY)
+if not os.path.exists(SUM_PATH):
+	os.makedirs(SUM_PATH)
+
 modelSavePath = os.path.join(MODEL_DIRECTORY, "model.ckpt")
 imgSavePath = os.path.join(DIRECTORY, "img")
 dataSavePath = os.path.join(DIRECTORY, "data")
+sumSavePath=SUM_PATH
 
 pathName, matName = selectData(DATA)
 dataloader = DataLoader(pathName, matName, PATCH_SIZE, RATIO, AUGMENT_RATIO)
@@ -174,10 +180,15 @@ with tf.Session() as sess:
 			trainProcess.save()
 		probMap.save()
 
+
 	OA = calOA(probMap.map, allLabeledLabel)
 	AA = calAA(probMap.map, allLabeledLabel)
 	kappa = calKappa(probMap.map, allLabeledLabel)
 	mixMatrix = calMixMatrix(probMap.map, allLabeledLabel)
+
+	with open(os.path.join(sumSavePath, "sum.txt"), "a+") as f:
+		print("data:%d, oa: %4f, aa:%4f, kappa:%4f" % \
+		      (DATA, OA, AA, kappa), file=f)
 
 	if NO_DETAILED_SUMMARY:
 		with open(os.path.join(dataSavePath, "sum.txt"), "a+") as f:
