@@ -136,14 +136,41 @@
 	\subsection{Train the Network}\label{subsec:train-the-network}
 	At first, we randomly shuffled the training set and divided it into several batches.
 	These batches ,instead of single pixel, would be feed into the model for training to accelerate the training process.
-	In our experiment, considering the training speed and final accuracy, we set the batch size as 50.
+	In our experiment, considering the training speed and final accuracy, we set the batch size to 50.
+	As for the loss function, we adopted the margin loss mentioned in section~\ref{sec:related-works}, instead of the
+	usually used cross-entropy loss function.
+	The network is trained using a first-order gradient-based optimization of stochastic objection, referred to as the
+	Adam algorithm.
+	Therefore, our training goal is to minimize the margin loss using the Adam optimizer, and we set the learning rate
+	to 0.0001.
+	When all batches have been fed into the network and finished training, we say the training process finished an epoch.
+	In our experiment, we conducted 100 epochs for each of the dataset.
 
 
 	\section{EXPERIMENT}\label{sec:experiment}
+	In this section, we showed and analyzed the training result.
+	We compared our model with six neural network based algorithms i.e., 1D CNN\cite{hu2015deep},
+	2D CNN\cite{sharma2016hyperspectral},
+	3D CNN\cite{hamida20183},
+	3D FCN\cite{lee2016contextual},
+	CNN-MRF\cite{cao2018hyperspectral},
+	the CapsNet that is identical to our DCCN model except the spectral channel and the machine learning algorithm SVM\@.
+	The accuracy metrics we used includes overall accuracy(OA), average accuracy(AA) and Kappa Coefficient($\kappa$).
 
 	\subsection{Dataset Introduction}\label{subsec:dataset-introduction}
+	In our experiment, we selected 4 real HSI dataset to train and test our DCCN model separately, that is, the
+	Pavia University dataset, the Pavia Center dataset, the Salinas Valley dataset and the Salinas A dataset, which is
+	a small subset of the Salinas Valley dataset.
+	The first three of them are relatively large dataset and the last one is relatively small.
+	We use these 4 dataset to test the robustness of out model when performing on different scale dataset.
+	Here follows the brief introduction of the four dataset.
+
 
 	\subsection{Environment}\label{subsec:environment}
+	We trained and tested the model on a PC with 4 NVIDIA RTX 2080Ti(11GB) GPUs, dual Xeon 4210 Processor
+	and 128GB of memory.
+	The operating system is Ubuntu server 18.04 x64 LTS\@.
+	We implement the model with Tensorflow 1.14.0 and the model is trained and tested on GPU\@.
 
 	\subsection{Result and Analysis}\label{subsec:result-and-analysis}
 
