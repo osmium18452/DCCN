@@ -87,18 +87,27 @@
 
 	To be specific, the detailed parameter of the DCCN deployed in our experiment are as follows.
 	For the spatial channel, the first layer is a 2D convolution layer, including 50 filters with the kernel size of
-	3$*$3 and stride of 1.
+	3×3 and stride of 1.
 	The following activation layer uses ReLU function as activation function.
-	The primary capsule layer uses 64 filters with kernel size of 3$*$3 and stride of 1.
-	Its output capsule's dimension is 8.
+	The primary capsule layer uses 64 filters with kernel size of 3×3 and stride of 1.
+	Its output capsules' dimension is 8.
 	For the spectral channel, the first layer is a 1D convolution layer,including 30 filters with kernel size of 32 and
 	stride of 8.
 	The following activation layer used ReLU activation function as well.
 	The primary capsule layer uses 64 filters with kernel size of 3 and stride of 1.
-	Its output capsule's dimension is 8 so that it can be concatenated with the spatial channel's output capsules and
+	Its output capsules' dimension is 8 so that it can be concatenated with the spatial channel's output capsules and
 	then fed into the fully connected capsule layer.
-%	TODO: the following 3 layer.
-%	TODO: color map of the output image.
+	For the first capsule layer, it has \textbf{100 or so?} capsules, which each contains 8 neurons inside.
+	The second capsule layer has $n_{classes}$ capsules with 16 neurons inside, where $n_{classes}$ denotes how many
+	different classes of pixels inside the HSI dataset.
+	So far, the main part of the DCCN model has finished.
+	But as is mentioned before, the method we proposed is end-to-end, so we added a output layer to process the output
+	of the network.
+	The output layer will squash the 2D tensor ,made up by capsules, into a 1D vector (Let's call the 1D vector
+	probability vector ,prob-vector in short, since each of its elements represents the probability of a pixel should
+	be assigned to the according class.) by replacing each of the capsule with its module and perform argument-max
+	($argmax$) function to gain the pixel's label.
+
 
 	And here's how the data flows in the DCCN.
 	First, the sliced patch is fed into the 2D convolution channel to extract features spatially, and the spectrum
@@ -107,11 +116,8 @@
 	Then, the extracted features, both spectral and spatial, are concatenated and fed into the capsule channel to output
 	the vectors (that is, the capsule) whose module represents the probability of a pixel being assigned a specific
 	label.
-	After that, the output layer will squash the 2D tensor (made up by capsules) into a 1D vector (Let's call it the
-	probability vector(prob-vector in short), since each of its elements represents the probability of a pixel should be
-	assigned to the according class) by calculating each of the capsule's module.
-	And finally, the output layer will assign a label to the pixel by performing argument-max ($argmax$) function to the
-	prob-vector.
+	And finally, the output layer will squash the outputted 2D tensor and assign a label to the pixel by performing
+	$argmax$ function to the prob-vector.
 
 	\subsection{Train the Network}\label{subsec:train-the-network}
 
