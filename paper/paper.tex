@@ -69,6 +69,20 @@
 	introduced how to train the network.
 
 	\subsection{Data Pre-Process}\label{subsec:data-pre-process}
+	The original HSI dataset is usually a chunk of 3D tensor that is too large to feed into the neural network, so we
+	have to do some process before input it into the DCCN\@.
+	On one hand, we extracted the pixel with its neighbour pixels' spectrum and grouped them as a spectral cube, namely
+	a patch.
+	On the other, we extracted the single pixel's spectrum as a 1D vector.
+	The pixel's spectrum vector will be combined with its corresponding patch to feed into the DCCN model simultaneously.
+	The patch an be assigned with different size.
+	In our experiment, we set it as 7×7×$n_{bands}$.
+
+	Usually, a HSI dataset has labeled and unlabeled pixels.
+	In our experiment we discarded those unlabeled pixels, only using the labeled pixels for training and testing.
+	We divided the labeled pixels into 3 groups in our experiment: training data, testing data and validating data.
+	We randomly selected 10\% of the total labeled pixels as training set, then we randomly selected 100 labeled pixels
+	and the rest of the labeled pixels was used to validate the model.
 
 	\subsection{Network Architecture}\label{subsec:network-architecture}
 	\begin{figure}[!ht]
@@ -120,6 +134,9 @@
 	$argmax$ function to the prob-vector.
 
 	\subsection{Train the Network}\label{subsec:train-the-network}
+	At first, we randomly shuffled the training set and divided it into several batches.
+	These batches ,instead of single pixel, would be feed into the model for training to accelerate the training process.
+	In our experiment, considering the training speed and final accuracy, we set the batch size as 50.
 
 
 	\section{EXPERIMENT}\label{sec:experiment}
