@@ -204,8 +204,12 @@
 	3D CNN\cite{hamida20183},
 	3D FCN\cite{lee2016contextual},
 	CNN-MRF\cite{cao2018hyperspectral},
-	the CapsNet that is identical to our DCCN model except the spectral channel and the machine learning algorithm SVM\@.
-	The accuracy metrics we used includes overall accuracy(OA), average accuracy(AA) and Kappa Coefficient($\kappa$).
+	the CapsNet that is identical to our DCCN model except the spectral channel, and the machine learning algorithm
+	SVM\@.
+	The competing neural network based algorithms are trained using the best network structure and hyper-parameters
+	proposed by the authors in their papers, and the SVM algorithm was trained using 10\% of the total labeled pixels
+	as the DCCN model.
+	The accuracy metrics we used include overall accuracy(OA), average accuracy(AA) and Kappa Coefficient($\kappa$).
 
 	\subsection{Dataset Introduction}\label{subsec:dataset-introduction}
 	In our experiment, we selected 4 real HSI dataset to train and test our DCCN model separately, that is, the
@@ -322,7 +326,7 @@
 	In our experiment we discarded those unlabeled pixels, only using the labeled pixels for training and testing.
 	We divided the labeled pixels into 3 groups in our experiment: training data, testing data and validating data.
 	We randomly selected 10\% of the total labeled pixels as training set, then we randomly selected 100 labeled pixels
-	and the rest of the labeled pixels was used to validate the model.
+	and all pixels except those chosen for training were used to validate the model.
 	The training and validating dataset are shown in figure~\ref{trainMaps} and figure~\ref{testMaps}
 
 	\begin{figure}[htbp]
@@ -363,7 +367,7 @@
 			\includegraphics[width=0.9\textwidth]{pic/p5/sa/1/img/testMap.eps}
 			\caption{}
 		\end{subfigure}
-		\caption{Validating set for (a) Pavia Center, (b) Pavia University, (c) Salinas Valley and (d) Salinas A}
+		\caption{Validating set for (a) Pavia Center, (b) Pavia University, (c) Salinas Valley and (d) Salinas A.}
 		\label{testMaps}
 	\end{figure}
 
@@ -375,7 +379,16 @@
 	3D CNN\cite{hamida20183},
 	3D FCN\cite{lee2016contextual},
 	CNN-MRF\cite{cao2018hyperspectral},
-	CapsNet and DCCN together in table~\ref{result}
+	CapsNet and DCCN together in table~\ref{result}.
+	From the results reported in table~\ref{result}, we can observe that our proposed DCCN model outperforms all the
+	other seven state-of-art models on all 4 dataset.
+	Among all competitors in this experiment, 3D CNN\cite{hamida20183} and the CapsNet model performed relatively second
+	best, since both of the two model achieved second high accuracy on different dataset.
+	This is expected because both of the two algorithm are spectral-spatial based so they can utilize more information,
+	compared to the 2D CNN, FCN, SVM and CNN-MRF classifiers, to classify the HSI pixels.
+	Nevertheless, our DCCN model can consistently outperform the second-best algorithm with an average \textbf{fill data
+	here} for AA, OA, $\kappa$.
+
 	\begin{table}[htb]
 		\tiny
 		\centering
@@ -446,11 +459,298 @@
 			\hline
 		\end{tabular}
 		\caption{Final result of all adopted models.}
-	\end{table}\label{result}
+		\label{result}
+	\end{table}
+
+	In figure~\ref{pupm,pcpm,svpm,sapm} we presented the classification maps outputted by our DCCN and seven competitor
+	model after the training process.
+	\begin{figure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\label{pcpm}
+	\end{figure}
+	\begin{figure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\label{pupm}
+	\end{figure}
+	\begin{figure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\label{svpm}
+	\end{figure}
+	\begin{figure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\caption{}
+		\end{subfigure}
+		\label{sapm}
+	\end{figure}
+
+	Finally, we presented the probability maps the eight algorithms produced of the four HSI dataset in
+	figure~\ref{pcpd ,pupd,svpd,sapd}.
+	\begin{figure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\label{pcpd}
+	\end{figure}
+	\begin{figure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\label{pupd}
+	\end{figure}
+	\begin{figure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\label{svpd}
+	\end{figure}
+	\begin{figure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{0.125\textwidth}
+			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\caption{}
+		\end{subfigure}
+		\label{sapd}
+	\end{figure}
 
 	\subsection{Convergence analysis}\label{subsec:convergence}
 	In this subsection, we evaluated the convergence of our proposed network.
-	Figure~\ref{accandloss}
+	Figure~\ref{accandloss} showed the training process of our DCCN model for 4 dataset separately.
 	\begin{figure}[htb]
 		\begin{subfigure}{0.24\textwidth}
 			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/lossAndAcc.eps}
@@ -471,11 +771,17 @@
 		\caption{Accuracy and loss of the proposed DCCN model with increasing iterations during the training process.
 		The horizontal axis represents 100 training epochs.
 		The corresponding relationship between the plot and dataset are:(a) for Pavia Center, (b) for Pavia University,
-			(c) for Salinas Vallet and (d) for Salinas A}
-	\end{figure}\label{accandloss}
+			(c) for Salinas Vallet and (d) for Salinas A.}
+		\label{accandloss}
+	\end{figure}
 
 
 	\section{DISCUSSION}\label{sec:discussion}
+	In this sector, we further explored the effect of different hyper-parameters to the DCCN\@.
+	We used the Pavia University and Salinas A dataset to train and test our model, so that we can observe the model's
+	performance on both large and small dataset.
+	We first tested the effect of different size of training set with a fixed patch size of 7*7, and then tested the
+	effect of
 
 
 	\section{CONCLUSION}\label{sec:conclusion}
