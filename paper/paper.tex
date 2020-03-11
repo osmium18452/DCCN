@@ -196,7 +196,8 @@
 
 	\section{EXPERIMENT}\label{sec:experiment}
 	In this section, we showed and analyzed the training result.
-	We compared our model with six neural network based algorithms i.e., 1D CNN\cite{hu2015deep},
+	We compared our model with six neural network based algorithms i.e.,
+	1D CNN\cite{hu2015deep},
 	2D CNN\cite{sharma2016hyperspectral},
 	3D CNN\cite{hamida20183},
 	3D FCN\cite{lee2016contextual},
@@ -206,8 +207,8 @@
 
 	\subsection{Dataset Introduction}\label{subsec:dataset-introduction}
 	In our experiment, we selected 4 real HSI dataset to train and test our DCCN model separately, that is, the
-	Pavia University dataset, the Pavia Center dataset, the Salinas Valley dataset and the Salinas A dataset, which is
-	a small subset of the Salinas Valley dataset.
+	Pavia University(PU) dataset, the Pavia Center(PC) dataset, the Salinas Valley(SV) dataset and the Salinas A(SA)
+	dataset, which is a small subset of the Salinas Valley dataset.
 	The first three of them are relatively large dataset and the last one is relatively small.
 	We use these 4 dataset to test the robustness of out model when performing on different scale dataset.
 	Here follows the brief introduction of the four dataset.
@@ -327,7 +328,14 @@
 			\label{salinas_gt}
 		\end{table}
 	\end{enumerate}
-	Usually, a HSI dataset has labeled and unlabeled pixels.
+
+	\subsection{Environment}\label{subsec:environment}
+	We trained and tested the model on a PC with 4 NVIDIA RTX 2080Ti(11GB) GPUs, dual Xeon 4210 Processor
+	and 128GB of memory.
+	The operating system is Ubuntu server 18.04 x64 LTS with CUDA 10.1 and CUDNN 7.6.5.
+	We implement the model with Tensorflow 1.14.0 and the model is trained and tested on GPU\@.
+
+	\subsection{Experiment Setup}Usually, a HSI dataset has labeled and unlabeled pixels.
 	In our experiment we discarded those unlabeled pixels, only using the labeled pixels for training and testing.
 	We divided the labeled pixels into 3 groups in our experiment: training data, testing data and validating data.
 	We randomly selected 10\% of the total labeled pixels as training set, then we randomly selected 100 labeled pixels
@@ -376,18 +384,20 @@
 		\label{testMaps}
 	\end{figure}
 
-	\subsection{Environment}\label{subsec:environment}
-	We trained and tested the model on a PC with 4 NVIDIA RTX 2080Ti(11GB) GPUs, dual Xeon 4210 Processor
-	and 128GB of memory.
-	The operating system is Ubuntu server 18.04 x64 LTS\@.
-	We implement the model with Tensorflow 1.14.0 and the model is trained and tested on GPU\@.
-
 	\subsection{Result and Analysis}\label{subsec:result-and-analysis}
+	First of all, we listed the quantitative classification assessment using the PU, PC, SV and SA dataset considering
+	SVM,
+	1D CNN\cite{hu2015deep},
+	2D CNN\cite{sharma2016hyperspectral},
+	3D CNN\cite{hamida20183},
+	3D FCN\cite{lee2016contextual},
+	CNN-MRF\cite{cao2018hyperspectral},
+	CapsNet and DCCN together.
+
+	\subsection{Convergence analysis}\label{subsec:convergence}
 
 
 	\section{DISCUSSION}\label{sec:discussion}
-
-	\subsection{Convergence analysis}\label{subsec:convergence}
 
 
 	\section{CONCLUSION}\label{sec:conclusion}
@@ -395,3 +405,52 @@
 
 	\bibliography{cite}
 \end{document}
+
+%Usually, a HSI dataset has labeled and unlabeled pixels.
+%	In our experiment we discarded those unlabeled pixels, only using the labeled pixels for training and testing.
+%	We divided the labeled pixels into 3 groups in our experiment: training data, testing data and validating data.
+%	We randomly selected 10\% of the total labeled pixels as training set, then we randomly selected 100 labeled pixels
+%	and the rest of the labeled pixels was used to validate the model.
+%	The training and validating dataset are shown in figure~\ref{trainMaps} and figure~\ref{testMaps}
+%
+%	\begin{figure}
+%		\begin{subfigure}
+%			\includegraphics{pic/p5/pc/1/img/trainMap.eps}
+%			\caption{}
+%		\end{subfigure}
+%		\begin{subfigure}
+%			\includegraphics{pic/p5/pu/1/img/trainMap.eps}
+%			\caption{}
+%		\end{subfigure}
+%		\begin{subfigure}
+%			\includegraphics{pic/p5/sl/1/img/trainMap.eps}
+%			\caption{}
+%		\end{subfigure}
+%		\begin{subfigure}
+%			\includegraphics{pic/p5/sa/1/img/trainMap.eps}
+%			\caption{}
+%		\end{subfigure}
+%		\caption{Training set for (a) Pavia Center, (b) Pavia University, (c) Salinas Valley and (d) Salinas A}
+%		\label{trainMaps}
+%	\end{figure}
+%
+%	\begin{figure}
+%		\begin{subfigure}
+%			\includegraphics{pic/p5/pc/1/img/testMap.eps}
+%			\caption{}
+%		\end{subfigure}
+%		\begin{subfigure}
+%			\includegraphics{pic/p5/pu/1/img/testMap.eps}
+%			\caption{}
+%		\end{subfigure}
+%		\begin{subfigure}
+%			\includegraphics{pic/p5/sl/1/img/testMap.eps}
+%			\caption{}
+%		\end{subfigure}
+%		\begin{subfigure}
+%			\includegraphics{pic/p5/sa/1/img/testMap.eps}
+%			\caption{}
+%		\end{subfigure}
+%		\caption{Validating set for (a) Pavia Center, (b) Pavia University, (c) Salinas Valley and (d) Salinas A}
+%		\label{testMaps}
+%	\end{figure}

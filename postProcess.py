@@ -112,7 +112,7 @@ class ProbMap:
 
 	def convertToColor(self,map):
 		unique = np.unique(map)
-		lut = np.zeros(np.max(unique) + 1, dtype=np.int)
+		lut = np.zeros((int)(np.max(unique) + 1), dtype=np.int)
 		for iter, i in enumerate(unique):
 			lut[i] = iter
 		map = lut[map]
