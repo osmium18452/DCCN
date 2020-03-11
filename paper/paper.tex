@@ -3,10 +3,62 @@
 \usepackage{fullpage}
 \usepackage{graphicx}
 \usepackage{enumerate}
+\usepackage{xcolor}
 
 \title{Spectral-Spatial Hyper-spectral Image Classification Using Dual-Channel Capsule Networks}
 \author{liu wenbo}
 \date{March 2020}
+
+\newcommand\crule[3][black]{\textcolor{#1}{\rule{#2}{#3}}}
+%color map definition
+%pavia c
+\definecolor{paviaU0}{RGB}{0, 0, 0}
+\definecolor{paviaU1}{RGB}{219, 94, 86}
+\definecolor{paviaU2}{RGB}{219, 183, 86}
+\definecolor{paviaU3}{RGB}{167, 219, 86}
+\definecolor{paviaU4}{RGB}{86, 219, 94}
+\definecolor{paviaU5}{RGB}{86, 219, 183}
+\definecolor{paviaU6}{RGB}{86, 167, 219}
+\definecolor{paviaU7}{RGB}{94, 86, 219}
+\definecolor{paviaU8}{RGB}{183, 86, 219}
+\definecolor{paviaU9}{RGB}{219, 86, 167}
+%pavia c
+\definecolor{pavia0}{RGB}{0, 0, 0}
+\definecolor{pavia1}{RGB}{219, 94, 86}
+\definecolor{pavia2}{RGB}{219, 183, 86}
+\definecolor{pavia3}{RGB}{167, 219, 86}
+\definecolor{pavia4}{RGB}{86, 219, 94}
+\definecolor{pavia5}{RGB}{86, 219, 183}
+\definecolor{pavia6}{RGB}{86, 167, 219}
+\definecolor{pavia7}{RGB}{94, 86, 219}
+\definecolor{pavia8}{RGB}{183, 86, 219}
+\definecolor{pavia9}{RGB}{219, 86, 167}
+%salinas
+\definecolor{salinas_corrected0}{RGB}{0, 0, 0}
+\definecolor{salinas_corrected1}{RGB}{219, 94, 86}
+\definecolor{salinas_corrected2}{RGB}{219, 144, 86}
+\definecolor{salinas_corrected3}{RGB}{219, 194, 86}
+\definecolor{salinas_corrected4}{RGB}{194, 219, 86}
+\definecolor{salinas_corrected5}{RGB}{145, 219, 86}
+\definecolor{salinas_corrected6}{RGB}{95, 219, 86}
+\definecolor{salinas_corrected7}{RGB}{86, 219, 127}
+\definecolor{salinas_corrected8}{RGB}{86, 219, 177}
+\definecolor{salinas_corrected9}{RGB}{86, 211, 219}
+\definecolor{salinas_corrected10}{RGB}{86, 161, 219}
+\definecolor{salinas_corrected11}{RGB}{86, 111, 219}
+\definecolor{salinas_corrected12}{RGB}{111, 86, 219}
+\definecolor{salinas_corrected13}{RGB}{160, 86, 219}
+\definecolor{salinas_corrected14}{RGB}{210, 86, 219}
+\definecolor{salinas_corrected15}{RGB}{219, 86, 178}
+\definecolor{salinas_corrected16}{RGB}{219, 86, 128}
+%salinas a
+\definecolor{salinasA_corrected0}{RGB}{0, 0, 0}
+\definecolor{salinasA_corrected1}{RGB}{219, 94, 86}
+\definecolor{salinasA_corrected2}{RGB}{211, 219, 86}
+\definecolor{salinasA_corrected3}{RGB}{86, 219, 94}
+\definecolor{salinasA_corrected4}{RGB}{86, 211, 219}
+\definecolor{salinasA_corrected5}{RGB}{94, 86, 219}
+\definecolor{salinasA_corrected6}{RGB}{219, 86, 211}
 
 
 \begin{document}
@@ -173,40 +225,114 @@
 		both images contain no information and have to be discarded before the analysis, so the final picture size is
 		1096*715 and 610*340.
 		The geometric resolution is 1.3 meters.
-		Both image has 9 different ground truth classes each.
+		Both image has 9 different ground truth classes each(see table\ref{paviagt}).
+		\begin{table}[h]
+			\centering
+			\begin{tabular}{|c|c|}
+				\hline
+				\textbf{PAVIA CENTER}    & \textbf{PAVIA UNIVERSITY}\\
+				\hline
+				\includegraphics[width=0.4\textwidth]{pic/pavia_gt.eps}&
+				\includegraphics[width=0.4\textwidth]{pic/paviaU_gt.eps}\\
+				\hline
+				\begin{tabular}{ccc}
+					\footnotesize
+					\textit{color}&\textit{land-cover type}&\textit{number}\\
+					\hline
+					\crule[pavia1]{0.02\textwidth}{0.02\textwidth} &Water &824    \\
+					\crule[pavia2]{0.02\textwidth}{0.02\textwidth} &Trees &820    \\
+					\crule[pavia3]{0.02\textwidth}{0.02\textwidth} &Asphalt &816    \\
+					\crule[pavia4]{0.02\textwidth}{0.02\textwidth} &Self-Blocking Bricks &808    \\
+					\crule[pavia5]{0.02\textwidth}{0.02\textwidth} &Bitumen &808    \\
+					\crule[pavia6]{0.02\textwidth}{0.02\textwidth} &Tiles &1260   \\
+					\crule[pavia7]{0.02\textwidth}{0.02\textwidth} &Shadows &476    \\
+					\crule[pavia8]{0.02\textwidth}{0.02\textwidth} &Meadows &824    \\
+					\crule[pavia9]{0.02\textwidth}{0.02\textwidth} &Bare Soil &820    \\
+				\end{tabular}&
+				\begin{tabular}{ccc}
+					\footnotesize
+					\textit{color}&\textit{land-cover type}&\textit{number}\\
+					\hline
+					\crule[paviaU1]{0.02\textwidth}{0.02\textwidth} &Asphalt &6631   \\
+					\crule[paviaU2]{0.02\textwidth}{0.02\textwidth} &Meadows &18649  \\
+					\crule[paviaU3]{0.02\textwidth}{0.02\textwidth} &Gravel &2099   \\
+					\crule[paviaU4]{0.02\textwidth}{0.02\textwidth} &Trees &3064   \\
+					\crule[paviaU5]{0.02\textwidth}{0.02\textwidth} &Painted metal sheets &1345   \\
+					\crule[paviaU6]{0.02\textwidth}{0.02\textwidth} &Bare Soil &5029   \\
+					\crule[paviaU7]{0.02\textwidth}{0.02\textwidth} &Bitumen &1330   \\
+					\crule[paviaU8]{0.02\textwidth}{0.02\textwidth} &Self-Blocking Bricks &3682   \\
+					\crule[paviaU9]{0.02\textwidth}{0.02\textwidth} &Shadows &947    \\
+				\end{tabular}\\
+				\hline
+			\end{tabular}
+			\caption{Number of samples in two Pavia scene dataset.}
+			\label{paviagt}
+		\end{table}
 		\item \textit{Salinas Scene} The Salinas scene was collected by the 224-band AVIRIS sensor over Salinas Valley,
 		California, and is characterized by high spatial resolution (3.7-meter pixels).
 		The Salinas Valley dataset is a 512*217 pixels image, and the Salinas A is a subset of the Salinas Valley
 		containing 86*83 pixels.
 		The Salinas scene dataset has been discarded 20 water absorption bands from the original image, so there's 204
 		bands left in both of the tow dataset.
-		The Salinas Valley dataset has 16 different classes but the Salinas A only has 6 different classes.
+		The Salinas Valley dataset has 16 different classes but the Salinas A only has 6 different classes(see
+		table\ref{salinas_gt}).
+		\begin{table}[h]
+			\centering
+			\begin{tabular}{|c|c|}
+				\hline
+				\textbf{SALINAS VALLEY}  & \textbf{SALINAS A}\\
+				\hline
+				\includegraphics[width=0.4\textwidth]{pic/salinas_gt.eps}&
+				\includegraphics[width=0.4\textwidth]{pic/salinasA_gt.eps}\\
+				\hline
+				\begin{tabular}{ccc}
+					\footnotesize
+					\textit{color}&\textit{land-cover type}&\textit{number}\\
+					\hline
+					\crule[salinas_corrected1]{0.02\textwidth}{0.02\textwidth} &Brocoli green weeds-1 &2009  \\
+					\crule[salinas_corrected2]{0.02\textwidth}{0.02\textwidth} &Brocoli green weeds-2 &3726  \\
+					\crule[salinas_corrected3]{0.02\textwidth}{0.02\textwidth} &Fallow &1976  \\
+					\crule[salinas_corrected4]{0.02\textwidth}{0.02\textwidth} &Fallow rough plow &1394  \\
+					\crule[salinas_corrected5]{0.02\textwidth}{0.02\textwidth} &Fallow smooth &2678  \\
+					\crule[salinas_corrected6]{0.02\textwidth}{0.02\textwidth} &Stubble &3959  \\
+					\crule[salinas_corrected7]{0.02\textwidth}{0.02\textwidth} &Celery &3579  \\
+					\crule[salinas_corrected8]{0.02\textwidth}{0.02\textwidth} &Grapes untrained &11271  \\
+					\crule[salinas_corrected9]{0.02\textwidth}{0.02\textwidth} &Soil vinyard develop &6203  \\
+					\crule[salinas_corrected10]{0.02\textwidth}{0.02\textwidth} &Corn senesced green weeds &3278  \\
+					\crule[salinas_corrected11]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine-4wk &1068  \\
+					\crule[salinas_corrected12]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine-5wk &1927  \\
+					\crule[salinas_corrected13]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine-6wk &916  \\
+					\crule[salinas_corrected14]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine-7wk &1070  \\
+					\crule[salinas_corrected15]{0.02\textwidth}{0.02\textwidth} &Vinyard untrained &7268  \\
+					\crule[salinas_corrected16]{0.02\textwidth}{0.02\textwidth} &Vinyard vertical trellis &1807  \\
+				\end{tabular}&
+				\begin{tabular}{ccc}
+					\footnotesize
+					\textit{color}&\textit{land-cover type}&\textit{number}\\
+					\hline
+					\crule[salinasA_corrected1]{0.02\textwidth}{0.02\textwidth} &Brocoli green weeds-1 &391  \\
+					\crule[salinasA_corrected2]{0.02\textwidth}{0.02\textwidth} &Corn senesced green weeds &1343  \\
+					\crule[salinasA_corrected3]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine-4wk &616  \\
+					\crule[salinasA_corrected4]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine-5wk &1525  \\
+					\crule[salinasA_corrected5]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine-6wk &674  \\
+					\crule[salinasA_corrected6]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine-7wk &799  \\
+					\\
+					\\
+					\\
+					\\
+					\\
+					\\
+					\\
+					\\
+					\\
+					\\
+				\end{tabular}\\
+				\hline
+			\end{tabular}
+			\caption{Number of samples in the two Salinas scene dataset.}
+			\label{salinas_gt}
+		\end{table}
 	\end{enumerate}
-	\begin{figure}[!ht]
-		\centering
-		\includegraphics[width=0.25\textwidth]{pic/pavia_gt.eps}
-		\includegraphics[width=0.25\textwidth]{pic/paviaU_gt.eps}
-		\includegraphics[width=0.25\textwidth]{pic/salinas_gt.eps}
-		\includegraphics[width=0.25\textwidth]{pic/salinasA_gt.eps}
-		\caption{The dataset we used}
-		\label{gt}
-	\end{figure}
-
-	\begin{table}[h]
-		\centering
-		\begin{tabular}{@{}lll|l@{}}
-			\toprule
-			\textit{Weather}    & \textit{Food} & \textit{Meeting}  & \textit{Attend?} \\ \midrule
-			cold                & full          & idc               & yes              \\
-			cold & empty & no & no               \\
-			hot & full & yes & yes              \\
-			cold & full & no & yes              \\
-			hot & empty & no & no               \\ \bottomrule
-		\end{tabular}
-		\caption{Dataset $\D$\label{table:1}}
-	\end{table}
-	\crule[blue]{1cm}{1cm}
-	\crule[#123456]{1cm}{1cm}
 
 	\subsection{Environment}\label{subsec:environment}
 	We trained and tested the model on a PC with 4 NVIDIA RTX 2080Ti(11GB) GPUs, dual Xeon 4210 Processor

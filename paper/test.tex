@@ -1,0 +1,173 @@
+%! Author = 17110
+%! Date = 2020/3/11
+
+% Preamble
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{import}
+\usepackage{fullpage}
+
+\newcommand\crule[3][black]{\textcolor{#1}{\rule{#2}{#3}}}
+
+\definecolor{c1}{RGB}{219, 48, 122}
+
+%pavia c
+\definecolor{paviaU0}{RGB}{0, 0, 0}
+\definecolor{paviaU1}{RGB}{219, 94, 86}
+\definecolor{paviaU2}{RGB}{219, 183, 86}
+\definecolor{paviaU3}{RGB}{167, 219, 86}
+\definecolor{paviaU4}{RGB}{86, 219, 94}
+\definecolor{paviaU5}{RGB}{86, 219, 183}
+\definecolor{paviaU6}{RGB}{86, 167, 219}
+\definecolor{paviaU7}{RGB}{94, 86, 219}
+\definecolor{paviaU8}{RGB}{183, 86, 219}
+\definecolor{paviaU9}{RGB}{219, 86, 167}
+%pavia c
+\definecolor{pavia0}{RGB}{0, 0, 0}
+\definecolor{pavia1}{RGB}{219, 94, 86}
+\definecolor{pavia2}{RGB}{219, 183, 86}
+\definecolor{pavia3}{RGB}{167, 219, 86}
+\definecolor{pavia4}{RGB}{86, 219, 94}
+\definecolor{pavia5}{RGB}{86, 219, 183}
+\definecolor{pavia6}{RGB}{86, 167, 219}
+\definecolor{pavia7}{RGB}{94, 86, 219}
+\definecolor{pavia8}{RGB}{183, 86, 219}
+\definecolor{pavia9}{RGB}{219, 86, 167}
+%salinas
+\definecolor{salinas_corrected0}{RGB}{0, 0, 0}
+\definecolor{salinas_corrected1}{RGB}{219, 94, 86}
+\definecolor{salinas_corrected2}{RGB}{219, 144, 86}
+\definecolor{salinas_corrected3}{RGB}{219, 194, 86}
+\definecolor{salinas_corrected4}{RGB}{194, 219, 86}
+\definecolor{salinas_corrected5}{RGB}{145, 219, 86}
+\definecolor{salinas_corrected6}{RGB}{95, 219, 86}
+\definecolor{salinas_corrected7}{RGB}{86, 219, 127}
+\definecolor{salinas_corrected8}{RGB}{86, 219, 177}
+\definecolor{salinas_corrected9}{RGB}{86, 211, 219}
+\definecolor{salinas_corrected10}{RGB}{86, 161, 219}
+\definecolor{salinas_corrected11}{RGB}{86, 111, 219}
+\definecolor{salinas_corrected12}{RGB}{111, 86, 219}
+\definecolor{salinas_corrected13}{RGB}{160, 86, 219}
+\definecolor{salinas_corrected14}{RGB}{210, 86, 219}
+\definecolor{salinas_corrected15}{RGB}{219, 86, 178}
+\definecolor{salinas_corrected16}{RGB}{219, 86, 128}
+%salinas a
+\definecolor{salinasA_corrected0}{RGB}{0, 0, 0}
+\definecolor{salinasA_corrected1}{RGB}{219, 94, 86}
+\definecolor{salinasA_corrected2}{RGB}{211, 219, 86}
+\definecolor{salinasA_corrected3}{RGB}{86, 219, 94}
+\definecolor{salinasA_corrected4}{RGB}{86, 211, 219}
+\definecolor{salinasA_corrected5}{RGB}{94, 86, 219}
+\definecolor{salinasA_corrected6}{RGB}{219, 86, 211}
+
+% Document
+\begin{document}
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{|c|c|}
+			\toprule
+			\hline
+			\textbf{PAVIA CENTER}    & \textbf{PAVIA UNIVERSITY}\\
+			\hline
+			\includegraphics[width=0.4\textwidth]{pic/pavia_gt.eps}&
+			\includegraphics[width=0.4\textwidth]{pic/paviaU_gt.eps}\\
+			\hline
+			\begin{tabular}{ccc}
+				\toprule
+				\textit{color}&\textit{land-cover type}&\textit{number}\\
+				\hline
+				\crule[pavia1]{0.02\textwidth}{0.02\textwidth} &Water                  &824    \\
+				\crule[pavia2]{0.02\textwidth}{0.02\textwidth} &Trees                  &820    \\
+				\crule[pavia3]{0.02\textwidth}{0.02\textwidth} &Asphalt                &816    \\
+				\crule[pavia4]{0.02\textwidth}{0.02\textwidth} &Self-Blocking Bricks   &808    \\
+				\crule[pavia5]{0.02\textwidth}{0.02\textwidth} &Bitumen                &808    \\
+				\crule[pavia6]{0.02\textwidth}{0.02\textwidth} &Tiles                  &1260   \\
+				\crule[pavia7]{0.02\textwidth}{0.02\textwidth} &Shadows                &476    \\
+				\crule[pavia8]{0.02\textwidth}{0.02\textwidth} &Meadows                &824    \\
+				\crule[pavia9]{0.02\textwidth}{0.02\textwidth} &Bare Soil              &820    \\
+			\end{tabular}&
+			\begin{tabular}{ccc}
+				\toprule
+				\textit{color}&\textit{land-cover type}&\textit{number}\\
+				\hline
+				\crule[paviaU1]{0.02\textwidth}{0.02\textwidth} &Asphalt                &6631   \\
+				\crule[paviaU2]{0.02\textwidth}{0.02\textwidth} &Meadows                &18649  \\
+				\crule[paviaU3]{0.02\textwidth}{0.02\textwidth} &Gravel                 &2099   \\
+				\crule[paviaU4]{0.02\textwidth}{0.02\textwidth} &Trees                  &3064   \\
+				\crule[paviaU5]{0.02\textwidth}{0.02\textwidth} &Painted metal sheets   &1345   \\
+				\crule[paviaU6]{0.02\textwidth}{0.02\textwidth} &Bare Soil              &5029   \\
+				\crule[paviaU7]{0.02\textwidth}{0.02\textwidth} &Bitumen                &1330   \\
+				\crule[paviaU8]{0.02\textwidth}{0.02\textwidth} &Self-Blocking Bricks   &3682   \\
+				\crule[paviaU9]{0.02\textwidth}{0.02\textwidth} &Shadows                &947    \\
+			\end{tabular}\\
+			\hline
+			\bottomrule
+		\end{tabular}
+		\caption{Number of samples in two Pavia scene dataset.}
+		\label{paviagt}
+	\end{table}
+
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{|c|c|}
+			\toprule
+			\hline
+			\textbf{SALINAS VALLEY}  & \textbf{SALINAS A}\\
+			\hline
+			\includegraphics[width=0.4\textwidth]{pic/salinas_gt.eps}&
+			\includegraphics[width=0.4\textwidth]{pic/salinasA_gt.eps}\\
+			\hline
+			\begin{tabular}{ccc}
+				\toprule
+				\textit{color}&\textit{land-cover type}&\textit{number}\\
+				\hline
+				\crule[salinas_corrected1]{0.02\textwidth}{0.02\textwidth} &Brocoli_green_weeds_1       &2009  \\
+				\crule[salinas_corrected2]{0.02\textwidth}{0.02\textwidth} &Brocoli_green_weeds_2       &3726  \\
+				\crule[salinas_corrected3]{0.02\textwidth}{0.02\textwidth} &Fallow                      &1976  \\
+				\crule[salinas_corrected4]{0.02\textwidth}{0.02\textwidth} &Fallow_rough_plow           &1394  \\
+				\crule[salinas_corrected5]{0.02\textwidth}{0.02\textwidth} &Fallow_smooth               &2678  \\
+				\crule[salinas_corrected6]{0.02\textwidth}{0.02\textwidth} &Stubble                     &3959  \\
+				\crule[salinas_corrected7]{0.02\textwidth}{0.02\textwidth} &Celery                      &3579  \\
+				\crule[salinas_corrected8]{0.02\textwidth}{0.02\textwidth} &Grapes_untrained            &11271  \\
+				\crule[salinas_corrected9]{0.02\textwidth}{0.02\textwidth} &Soil_vinyard_develop        &6203  \\
+				\crule[salinas_corrected10]{0.02\textwidth}{0.02\textwidth} &Corn_senesced_green_weeds  &3278  \\
+				\crule[salinas_corrected11]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_4wk        &1068  \\
+				\crule[salinas_corrected12]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_5wk        &1927  \\
+				\crule[salinas_corrected13]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_6wk        &916  \\
+				\crule[salinas_corrected14]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_7wk        &1070  \\
+				\crule[salinas_corrected15]{0.02\textwidth}{0.02\textwidth} &Vinyard_untrained          &7268  \\
+				\crule[salinas_corrected16]{0.02\textwidth}{0.02\textwidth} &Vinyard_vertical_trellis   &1807  \\
+			\end{tabular}&
+			\begin{tabular}{ccc}
+				\toprule
+				\textit{color}&\textit{land-cover type}&\textit{number}\\
+				\hline
+				\crule[salinasA_corrected1]{0.02\textwidth}{0.02\textwidth} &Brocoli_green_weeds_1       &391  \\
+				\crule[salinasA_corrected2]{0.02\textwidth}{0.02\textwidth} &Corn_senesced_green_weeds   &1343  \\
+				\crule[salinasA_corrected3]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_4wk         &616  \\
+				\crule[salinasA_corrected4]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_5wk         &1525  \\
+				\crule[salinasA_corrected5]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_6wk         &674  \\
+				\crule[salinasA_corrected6]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_7wk         &799  \\
+				\\
+				\\
+				\\
+				\\
+				\\
+				\\
+				\\
+				\\
+				\\
+				\\
+			\end{tabular}\\
+			\hline
+			\bottomrule
+		\end{tabular}
+		\caption{Number of samples in the two Salinas scene dataset.}
+		\label{salinas_gt}
+	\end{table}
+
+\end{document}

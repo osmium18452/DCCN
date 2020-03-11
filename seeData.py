@@ -20,12 +20,9 @@ def convertToColor(palette, map):
 
 
 if __name__ == "__main__":
-	for i in range(7):
+	for i in (2,3,4,5):
 		path, mat = selectData(i)
 		dic = scio.loadmat(path[1])[mat[1]]
-		print(mat[1], np.shape(dic))
-		continue
-
 		unique = np.unique(dic)
 		lut = np.zeros(np.max(unique) + 1, dtype=np.int)
 		for iter, i in enumerate(unique):
@@ -34,7 +31,9 @@ if __name__ == "__main__":
 		palette = {0: (0, 0, 0)}
 		for k, color in enumerate(sns.color_palette("hls", len(np.unique(dic)) - 1)):
 			palette[k + 1] = tuple(np.asarray(255 * np.array(color), dtype='uint8'))
-		gt = convertToColor(palette, dic)
-		plt.imshow(gt)
-		sv = plt.gcf()
-		sv.savefig(".\\paper\\pic\\" + mat[1] + ".eps", format="eps", dpi=300)
+		for i in palette:
+			print("\definecolor{%s%d}{RGB}{%d, %d, %d}"%(mat[0],i,palette[i][0],palette[i][1],palette[i][2]))
+		# gt = convertToColor(palette, dic)
+		# plt.imshow(gt)
+		# sv = plt.gcf()
+		# sv.savefig(".\\paper\\pic\\" + mat[1] + ".eps", format="eps", dpi=300)
