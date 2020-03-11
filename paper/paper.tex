@@ -4,6 +4,7 @@
 \usepackage{graphicx}
 \usepackage{enumerate}
 \usepackage{xcolor}
+\usepackage{subfiles}
 
 \title{Spectral-Spatial Hyper-spectral Image Classification Using Dual-Channel Capsule Networks}
 \author{liu wenbo}
@@ -118,8 +119,8 @@
 	\section{PROPOSED METHOD}\label{sec:proposed-method}
 
 	In this section, we introduce our proposed algorithm.
-	We first described how we pre-process the HSI data, then we \textbf{depicted} the network structure and finally we
-	introduced how to train the network.
+	We first described how we pre-process the HSI data, then we introduced the network structure and finally we
+	introduced the hyper parameters we adopted to train the network.
 
 	\subsection{Data Pre-Process}\label{subsec:data-pre-process}
 	The original HSI dataset is usually a chunk of 3D tensor that is too large to feed into the neural network, so we
@@ -130,12 +131,6 @@
 	The pixel's spectrum vector will be combined with its corresponding patch to feed into the DCCN model simultaneously.
 	The patch an be assigned with different size.
 	In our experiment, we set it as 7×7×$n_{bands}$.
-
-	Usually, a HSI dataset has labeled and unlabeled pixels.
-	In our experiment we discarded those unlabeled pixels, only using the labeled pixels for training and testing.
-	We divided the labeled pixels into 3 groups in our experiment: training data, testing data and validating data.
-	We randomly selected 10\% of the total labeled pixels as training set, then we randomly selected 100 labeled pixels
-	and the rest of the labeled pixels was used to validate the model.
 
 	\subsection{Network Architecture}\label{subsec:network-architecture}
 	\begin{figure}[!ht]
@@ -174,7 +169,6 @@
 	probability vector ,prob-vector in short, since each of its elements represents the probability of a pixel should
 	be assigned to the according class.) by replacing each of the capsule with its module and perform argument-max
 	($argmax$) function to gain the pixel's label.
-
 
 	And here's how the data flows in the DCCN.
 	First, the sliced patch is fed into the 2D convolution channel to extract features spatially, and the spectrum
@@ -333,6 +327,54 @@
 			\label{salinas_gt}
 		\end{table}
 	\end{enumerate}
+	Usually, a HSI dataset has labeled and unlabeled pixels.
+	In our experiment we discarded those unlabeled pixels, only using the labeled pixels for training and testing.
+	We divided the labeled pixels into 3 groups in our experiment: training data, testing data and validating data.
+	We randomly selected 10\% of the total labeled pixels as training set, then we randomly selected 100 labeled pixels
+	and the rest of the labeled pixels was used to validate the model.
+	The training and validating dataset are shown in figure~\ref{trainMaps} and figure~\ref{testMaps}
+
+	\begin{figure}
+		\begin{subfigure}
+			\includegraphics{pic/p5/pc/1/img/trainMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}
+			\includegraphics{pic/p5/pu/1/img/trainMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}
+			\includegraphics{pic/p5/sl/1/img/trainMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}
+			\includegraphics{pic/p5/sa/1/img/trainMap.eps}
+			\caption{}
+		\end{subfigure}
+		\caption{Training set for (a) Pavia Center, (b) Pavia University, (c) Salinas Valley and (d) Salinas A}
+		\label{trainMaps}
+	\end{figure}
+
+	\begin{figure}
+		\begin{subfigure}
+			\includegraphics{pic/p5/pc/1/img/testMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}
+			\includegraphics{pic/p5/pu/1/img/testMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}
+			\includegraphics{pic/p5/sl/1/img/testMap.eps}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}
+			\includegraphics{pic/p5/sa/1/img/testMap.eps}
+			\caption{}
+		\end{subfigure}
+		\caption{Validating set for (a) Pavia Center, (b) Pavia University, (c) Salinas Valley and (d) Salinas A}
+		\label{testMaps}
+	\end{figure}
 
 	\subsection{Environment}\label{subsec:environment}
 	We trained and tested the model on a PC with 4 NVIDIA RTX 2080Ti(11GB) GPUs, dual Xeon 4210 Processor

@@ -111,6 +111,11 @@ class ProbMap:
 			# print(k,color)
 
 	def convertToColor(self,map):
+		unique = np.unique(map)
+		lut = np.zeros(np.max(unique) + 1, dtype=np.int)
+		for iter, i in enumerate(unique):
+			lut[i] = iter
+		map = lut[map]
 		a = np.zeros(shape=(np.shape(map)[0], np.shape(map)[1], 3), dtype=np.uint8)
 		for i in range(np.shape(map)[0]):
 			for j in range(np.shape(map)[1]):
