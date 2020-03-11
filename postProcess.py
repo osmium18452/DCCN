@@ -111,10 +111,19 @@ class ProbMap:
 			# print(k,color)
 
 	def convertToColor(self,map):
+		# with open("seeData.txt","w+") as f:
+		# 	for i in map:
+		# 		for j in i :
+		# 			print("%3d"%j,end="",file=f)
+		# 		print(file=f)
+		map=np.array(map,dtype=int)
 		unique = np.unique(map)
 		lut = np.zeros((int)(np.max(unique) + 1), dtype=np.int)
-		for iter, i in enumerate(unique):
-			lut[i] = iter
+		for it, i in enumerate(unique):
+			# print(it,i)
+			lut[i] = it
+		# print(lut)
+		# print(unique)
 		map = lut[map]
 		a = np.zeros(shape=(np.shape(map)[0], np.shape(map)[1], 3), dtype=np.uint8)
 		for i in range(np.shape(map)[0]):
@@ -138,15 +147,23 @@ class ProbMap:
 		self.map = pickle.load(f)
 
 	def drawGt(self):
+		f=open("wtf.txt","w+")
 		plt.figure()
-		groundTruth = np.zeros(shape=(self.height, self.width))
+		groundTruth = np.zeros(shape=(self.height, self.width),dtype=int)
+		# print(self.height,self.width,"8888888888")
 		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
-				h = index // self.height
-				w = index % self.height
+				h = index // self.width
+				w = index % self.width
+				# print("%5d%5d%5d%5d"%(h,w,index,i),file=f)
+				# if groundTruth[h][w]!=0:
+				# 	print("*****",groundTruth[h][w],h,w,index,i,file=f)
 				groundTruth[h][w] += (self.groundTruth[i] + 1)
+				# print(groundTruth[h][w],file=f)
 				pbar.update()
+		# # print(np.unique(groundTruth),"*******")
+		# f.close()
 
 		groundTruth=self.convertToColor(groundTruth)
 		plt.imshow(groundTruth)
@@ -163,9 +180,9 @@ class ProbMap:
 		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
-				h = index // self.height
-				w = index % self.height
-				probMap[h][w] += (pred[i] + 1)
+				h = index // self.width
+				w = index % self.width
+				probMap[h][w] = (pred[i] + 1)
 				# print(h,w,i,np.shape(pred),np.shape(self.groundTruth)[0])
 				pbar.update()
 
@@ -182,8 +199,8 @@ class ProbMap:
 		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
-				h = index // self.height
-				w = index % self.height
+				h = index // self.width
+				w = index % self.width
 				probMap[h][w] += (pred[i] + 1)
 				pbar.update()
 		x = np.arange(0, self.height, 1)
@@ -201,8 +218,8 @@ class ProbMap:
 		probMap = np.zeros(shape=[self.height, self.width])
 		for i in range(np.shape(self.groundTruth)[0]):
 			index = self.index[i]
-			h = index // self.height
-			w = index % self.height
+			h = index // self.width
+			w = index % self.width
 			probMap[h][w] += self.map[i][self.groundTruth[i]]
 
 		plt.imshow(probMap,cmap="hot")
@@ -217,16 +234,16 @@ class ProbMap:
 		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
-				h = index // self.height
-				w = index % self.height
+				h = index // self.width
+				w = index % self.width
 				groundTruth[h][w] += (self.groundTruth[i] + 1)
 				pbar.update()
 
 		trainMap = np.zeros(shape=[self.height, self.width])
 		for i in range(np.shape(self.trainIndex)[0]):
 			index = self.trainIndex[i]
-			h = index // self.height
-			w = index % self.height
+			h = index // self.width
+			w = index % self.width
 			trainMap[h][w] = 1
 
 		for i in range(self.height):
@@ -245,8 +262,8 @@ class ProbMap:
 		with tqdm(total=np.shape(self.groundTruth)[0], desc="processing gt", ascii=TQDM_ASCII) as pbar:
 			for i in range(np.shape(self.groundTruth)[0]):
 				index = self.index[i]
-				h = index // self.height
-				w = index % self.height
+				h = index // self.width
+				w = index % self.width
 				groundTruth[h][w] += (self.groundTruth[i] + 1)
 				pbar.update()
 
@@ -254,8 +271,8 @@ class ProbMap:
 		# print(np.shape(self.groundTruth)[0])
 		for i in range(np.shape(self.trainIndex)[0]):
 			index = self.trainIndex[i]
-			h = index // self.height
-			w = index % self.height
+			h = index // self.width
+			w = index % self.width
 			testMap[h][w] = 0
 
 		for i in range(self.height):
@@ -276,19 +293,23 @@ if __name__ == "__main__":
 	# exit(0)
 
 	pathName = []
-	pathName.append("./data/Indian_pines.mat")
-	pathName.append("./data/Indian_pines_gt.mat")
+	pathName.append("./data/SalinasA_corrected.mat")
+	pathName.append("./data/SalinasA_gt.mat")
 	matName = []
-	matName.append("indian_pines")
-	matName.append("indian_pines_gt")
-	print("using indian pines**************************")
+	matName.append("salinasA_corrected")
+	matName.append("salinasA_gt")
 	dataloader = DataLoader(pathName, matName, 9, 0.05, 1)
 	print(dataloader.numClasses)
 	allLabeledPatch, allLabeledSpectrum, allLabeledLabel, allLabeledIndex = dataloader.loadAllLabeledData()
-	probMap = ProbMap(dataloader.numClasses, os.path.join(".", "save", "feb28"),
+	probMap = ProbMap(dataloader.numClasses, ".\\save\\formal0311\\data\\DCCN\\p5\\sa\\1",
 	                  allLabeledLabel, allLabeledIndex, dataloader.height, dataloader.width, dataloader.trainIndex)
 	probMap.restore()
-	# print(dataloader.numClasses)
+	with open("seeData.txt","w+") as f:
+		for i in dataloader.label:
+			for j in i :
+				print("%3d"%j,end="",file=f)
+			print(file=f)
+	print(dataloader.numClasses)
 	probMap.drawGt()
 	print(1)
 	probMap.drawPredictedMap()

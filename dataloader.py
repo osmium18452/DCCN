@@ -89,6 +89,7 @@ class DataLoader:
 		for iter, i in enumerate(unique):
 			lut[i] = iter
 		self.label = lut[self.label]
+		# f=open("wtf3.txt","w+")
 		with tqdm(total=self.height * self.width, desc="slicing ", ncols=LENGTH, ascii=TQDM_ASCII) as pbar:
 			for i in range(self.height):
 				for j in range(self.width):
@@ -101,9 +102,10 @@ class DataLoader:
 					if tmpLabel != 0:
 						self.classPatches[tmpLabel - 1].append(tmpPatch)
 						self.classSpectrum[tmpLabel - 1].append(tmpSpectrum)
-						self.classIndex[tmpLabel - 1].append(i * self.height + j)
+						self.classIndex[tmpLabel - 1].append(i * self.width + j)
 					pbar.update(1)
 		# self.numEachClass.append(0)
+		# f.close()
 		for i in range(self.numClasses):
 			self.numEachClass.append(len(self.classIndex[i]))
 
@@ -249,7 +251,13 @@ class DataLoader:
 			patch.extend(self.classPatches[i][j] for j in range(self.numEachClass[i]))
 			spectrum.extend(self.classSpectrum[i][j] for j in range(self.numEachClass[i]))
 			index.extend(self.classIndex[i][j] for j in range(self.numEachClass[i]))
+			# print("hhh***", len(index), len(np.unique(index)),i)
 			label.extend(i for j in range(self.numEachClass[i]))
+		# with open("wtf4.txt","w+") as f:
+		# 	for i in self.classIndex:
+		# 		for j in i:
+		# 			print("%5d"%j,end=" ",file=f)
+		# 		print(file=f)
 		patch = np.array(patch)
 		spectrum = np.array(spectrum)
 		label = convertToOneHot(np.array(label))

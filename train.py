@@ -217,7 +217,7 @@ with tf.Session() as sess:
 		trainProcess.drawLoss()
 		trainProcess.drawAcc()
 		probMap.drawProbMap()
-		probMap.drawGt()
 		probMap.drawPredictedMap()
 		probMap.drawTrainMap()
 		probMap.drawTestMap()
+		probMap.drawGt()
