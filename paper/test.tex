@@ -10,6 +10,7 @@
 \usepackage{xcolor}
 \usepackage{import}
 \usepackage{fullpage}
+\usepackage{resizegather}
 
 \newcommand\crule[3][black]{\textcolor{#1}{\rule{#2}{#3}}}
 
@@ -68,106 +69,148 @@
 \begin{document}
 	\begin{table}[h]
 		\centering
-		\begin{tabular}{|c|c|}
-			\toprule
-			\hline
-			\textbf{PAVIA CENTER}    & \textbf{PAVIA UNIVERSITY}\\
-			\hline
-			\includegraphics[width=0.4\textwidth]{pic/pavia_gt.eps}&
-			\includegraphics[width=0.4\textwidth]{pic/paviaU_gt.eps}\\
-			\hline
-			\begin{tabular}{ccc}
+		\tiny
+		\resizebox{\textwidth}{!}{
+			\begin{tabular}{|c|c|c|c|}
 				\toprule
-				\textit{color}&\textit{land-cover type}&\textit{number}\\
 				\hline
-				\crule[pavia1]{0.02\textwidth}{0.02\textwidth} &Water                  &824    \\
-				\crule[pavia2]{0.02\textwidth}{0.02\textwidth} &Trees                  &820    \\
-				\crule[pavia3]{0.02\textwidth}{0.02\textwidth} &Asphalt                &816    \\
-				\crule[pavia4]{0.02\textwidth}{0.02\textwidth} &Self-Blocking Bricks   &808    \\
-				\crule[pavia5]{0.02\textwidth}{0.02\textwidth} &Bitumen                &808    \\
-				\crule[pavia6]{0.02\textwidth}{0.02\textwidth} &Tiles                  &1260   \\
-				\crule[pavia7]{0.02\textwidth}{0.02\textwidth} &Shadows                &476    \\
-				\crule[pavia8]{0.02\textwidth}{0.02\textwidth} &Meadows                &824    \\
-				\crule[pavia9]{0.02\textwidth}{0.02\textwidth} &Bare Soil              &820    \\
-			\end{tabular}&
-			\begin{tabular}{ccc}
-				\toprule
-				\textit{color}&\textit{land-cover type}&\textit{number}\\
+				\textbf{PAVIA CENTER} & \textbf{PAVIA UNIVERSITY}&\textbf{SALINAS VALLEY}  & \textbf{SALINAS A}\\
 				\hline
-				\crule[paviaU1]{0.02\textwidth}{0.02\textwidth} &Asphalt                &6631   \\
-				\crule[paviaU2]{0.02\textwidth}{0.02\textwidth} &Meadows                &18649  \\
-				\crule[paviaU3]{0.02\textwidth}{0.02\textwidth} &Gravel                 &2099   \\
-				\crule[paviaU4]{0.02\textwidth}{0.02\textwidth} &Trees                  &3064   \\
-				\crule[paviaU5]{0.02\textwidth}{0.02\textwidth} &Painted metal sheets   &1345   \\
-				\crule[paviaU6]{0.02\textwidth}{0.02\textwidth} &Bare Soil              &5029   \\
-				\crule[paviaU7]{0.02\textwidth}{0.02\textwidth} &Bitumen                &1330   \\
-				\crule[paviaU8]{0.02\textwidth}{0.02\textwidth} &Self-Blocking Bricks   &3682   \\
-				\crule[paviaU9]{0.02\textwidth}{0.02\textwidth} &Shadows                &947    \\
-			\end{tabular}\\
-			\hline
-			\bottomrule
-		\end{tabular}
+				\includegraphics[width=0.4\textwidth]{pic/pavia_gt.eps}&
+				\includegraphics[width=0.4\textwidth]{pic/paviaU_gt.eps}&
+				\includegraphics[width=0.4\textwidth]{pic/salinas_gt.eps}&
+				\includegraphics[width=0.4\textwidth]{pic/salinasA_gt.eps}\\
+				\hline
+				\begin{tabular}[t]{ccc}
+					\toprule
+					\textit{color}&\textit{land-cover type}&\textit{number}\\
+					\hline
+					\crule[pavia1]{0.02\textwidth}{0.02\textwidth} &Water &824    \\
+					\crule[pavia2]{0.02\textwidth}{0.02\textwidth} &Trees &820    \\
+					\crule[pavia3]{0.02\textwidth}{0.02\textwidth} &Asphalt &816    \\
+					\crule[pavia4]{0.02\textwidth}{0.02\textwidth} &Self-Blocking Bricks &808    \\
+					\crule[pavia5]{0.02\textwidth}{0.02\textwidth} &Bitumen &808    \\
+					\crule[pavia6]{0.02\textwidth}{0.02\textwidth} &Tiles &1260   \\
+					\crule[pavia7]{0.02\textwidth}{0.02\textwidth} &Shadows &476    \\
+					\crule[pavia8]{0.02\textwidth}{0.02\textwidth} &Meadows &824    \\
+					\crule[pavia9]{0.02\textwidth}{0.02\textwidth} &Bare Soil &820    \\
+				\end{tabular}&
+				\begin{tabular}[t]{ccc}
+					\toprule
+					\textit{color}&\textit{land-cover type}&\textit{number}\\
+					\hline
+					\crule[paviaU1]{0.02\textwidth}{0.02\textwidth} &Asphalt &6631   \\
+					\crule[paviaU2]{0.02\textwidth}{0.02\textwidth} &Meadows &18649  \\
+					\crule[paviaU3]{0.02\textwidth}{0.02\textwidth} &Gravel &2099   \\
+					\crule[paviaU4]{0.02\textwidth}{0.02\textwidth} &Trees &3064   \\
+					\crule[paviaU5]{0.02\textwidth}{0.02\textwidth} &Painted metal sheets &1345   \\
+					\crule[paviaU6]{0.02\textwidth}{0.02\textwidth} &Bare Soil &5029   \\
+					\crule[paviaU7]{0.02\textwidth}{0.02\textwidth} &Bitumen &1330   \\
+					\crule[paviaU8]{0.02\textwidth}{0.02\textwidth} &Self-Blocking Bricks &3682   \\
+					\crule[paviaU9]{0.02\textwidth}{0.02\textwidth} &Shadows &947    \\
+				\end{tabular}&
+				\begin{tabular}[t]{ccc}
+					\toprule
+					\textit{color}&\textit{land-cover type}&\textit{number}\\
+					\hline
+					\crule[salinas_corrected1]{0.02\textwidth}{0.02\textwidth} &Brocoli green weeds 1 &2009  \\
+					\crule[salinas_corrected2]{0.02\textwidth}{0.02\textwidth} &Brocoli green weeds 2 &3726  \\
+					\crule[salinas_corrected3]{0.02\textwidth}{0.02\textwidth} &Fallow &1976  \\
+					\crule[salinas_corrected4]{0.02\textwidth}{0.02\textwidth} &Fallow rough plow &1394  \\
+					\crule[salinas_corrected5]{0.02\textwidth}{0.02\textwidth} &Fallow smooth &2678  \\
+					\crule[salinas_corrected6]{0.02\textwidth}{0.02\textwidth} &Stubble &3959  \\
+					\crule[salinas_corrected7]{0.02\textwidth}{0.02\textwidth} &Celery &3579  \\
+					\crule[salinas_corrected8]{0.02\textwidth}{0.02\textwidth} &Grapes untrained &11271  \\
+					\crule[salinas_corrected9]{0.02\textwidth}{0.02\textwidth} &Soil vinyard develop &6203  \\
+					\crule[salinas_corrected10]{0.02\textwidth}{0.02\textwidth} &Corn senesced green weeds &3278  \\
+					\crule[salinas_corrected11]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 4wk &1068  \\
+					\crule[salinas_corrected12]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 5wk &1927  \\
+					\crule[salinas_corrected13]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 6wk &916  \\
+					\crule[salinas_corrected14]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 7wk &1070  \\
+					\crule[salinas_corrected15]{0.02\textwidth}{0.02\textwidth} &Vinyard untrained &7268  \\
+					\crule[salinas_corrected16]{0.02\textwidth}{0.02\textwidth} &Vinyard vertical trellis &1807  \\
+				\end{tabular}&
+				\begin{tabular}[t]{ccc}
+					\toprule
+					\textit{color}&\textit{land-cover type}&\textit{number}\\
+					\hline
+					\crule[salinasA_corrected1]{0.02\textwidth}{0.02\textwidth} &Brocoli green weeds 1 &391  \\
+					\crule[salinasA_corrected2]{0.02\textwidth}{0.02\textwidth} &Corn senesced green weeds &1343  \\
+					\crule[salinasA_corrected3]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 4wk &616  \\
+					\crule[salinasA_corrected4]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 5wk &1525  \\
+					\crule[salinasA_corrected5]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 6wk &674  \\
+					\crule[salinasA_corrected6]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 7wk &799  \\
+				\end{tabular}\\
+				\hline
+				\bottomrule
+			\end{tabular}}
 		\caption{Number of samples in two Pavia scene dataset.}
 		\label{paviagt}
 	\end{table}
 
 	\begin{table}[h]
 		\centering
-		\begin{tabular}{|c|c|}
-			\toprule
-			\hline
-			\textbf{SALINAS VALLEY}  & \textbf{SALINAS A}\\
-			\hline
-			\includegraphics[width=0.4\textwidth]{pic/salinas_gt.eps}&
-			\includegraphics[width=0.4\textwidth]{pic/salinasA_gt.eps}\\
-			\hline
-			\begin{tabular}{ccc}
+		\resizebox{0.5\textwidth}{!}{
+			\begin{tabular}{|c|c|}
 				\toprule
-				\textit{color}&\textit{land-cover type}&\textit{number}\\
 				\hline
-				\crule[salinas_corrected1]{0.02\textwidth}{0.02\textwidth} &Brocoli_green_weeds_1       &2009  \\
-				\crule[salinas_corrected2]{0.02\textwidth}{0.02\textwidth} &Brocoli_green_weeds_2       &3726  \\
-				\crule[salinas_corrected3]{0.02\textwidth}{0.02\textwidth} &Fallow                      &1976  \\
-				\crule[salinas_corrected4]{0.02\textwidth}{0.02\textwidth} &Fallow_rough_plow           &1394  \\
-				\crule[salinas_corrected5]{0.02\textwidth}{0.02\textwidth} &Fallow_smooth               &2678  \\
-				\crule[salinas_corrected6]{0.02\textwidth}{0.02\textwidth} &Stubble                     &3959  \\
-				\crule[salinas_corrected7]{0.02\textwidth}{0.02\textwidth} &Celery                      &3579  \\
-				\crule[salinas_corrected8]{0.02\textwidth}{0.02\textwidth} &Grapes_untrained            &11271  \\
-				\crule[salinas_corrected9]{0.02\textwidth}{0.02\textwidth} &Soil_vinyard_develop        &6203  \\
-				\crule[salinas_corrected10]{0.02\textwidth}{0.02\textwidth} &Corn_senesced_green_weeds  &3278  \\
-				\crule[salinas_corrected11]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_4wk        &1068  \\
-				\crule[salinas_corrected12]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_5wk        &1927  \\
-				\crule[salinas_corrected13]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_6wk        &916  \\
-				\crule[salinas_corrected14]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_7wk        &1070  \\
-				\crule[salinas_corrected15]{0.02\textwidth}{0.02\textwidth} &Vinyard_untrained          &7268  \\
-				\crule[salinas_corrected16]{0.02\textwidth}{0.02\textwidth} &Vinyard_vertical_trellis   &1807  \\
-			\end{tabular}&
-			\begin{tabular}{ccc}
-				\toprule
-				\textit{color}&\textit{land-cover type}&\textit{number}\\
+				\textbf{SALINAS VALLEY}  & \textbf{SALINAS A}\\
 				\hline
-				\crule[salinasA_corrected1]{0.02\textwidth}{0.02\textwidth} &Brocoli_green_weeds_1       &391  \\
-				\crule[salinasA_corrected2]{0.02\textwidth}{0.02\textwidth} &Corn_senesced_green_weeds   &1343  \\
-				\crule[salinasA_corrected3]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_4wk         &616  \\
-				\crule[salinasA_corrected4]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_5wk         &1525  \\
-				\crule[salinasA_corrected5]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_6wk         &674  \\
-				\crule[salinasA_corrected6]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_7wk         &799  \\
-				\\
-				\\
-				\\
-				\\
-				\\
-				\\
-				\\
-				\\
-				\\
-				\\
-			\end{tabular}\\
-			\hline
-			\bottomrule
-		\end{tabular}
+				\includegraphics[width=0.4\textwidth]{pic/salinas_gt.eps}&
+				\includegraphics[width=0.4\textwidth]{pic/salinasA_gt.eps}\\
+				\hline
+				\begin{tabular}{ccc}
+					\toprule
+					\textit{color}&\textit{land-cover type}&\textit{number}\\
+					\hline
+					\crule[salinas_corrected1]{0.02\textwidth}{0.02\textwidth} &Brocoli_green_weeds_1 &2009  \\
+					\crule[salinas_corrected2]{0.02\textwidth}{0.02\textwidth} &Brocoli_green_weeds_2 &3726  \\
+					\crule[salinas_corrected3]{0.02\textwidth}{0.02\textwidth} &Fallow &1976  \\
+					\crule[salinas_corrected4]{0.02\textwidth}{0.02\textwidth} &Fallow_rough_plow &1394  \\
+					\crule[salinas_corrected5]{0.02\textwidth}{0.02\textwidth} &Fallow_smooth &2678  \\
+					\crule[salinas_corrected6]{0.02\textwidth}{0.02\textwidth} &Stubble &3959  \\
+					\crule[salinas_corrected7]{0.02\textwidth}{0.02\textwidth} &Celery &3579  \\
+					\crule[salinas_corrected8]{0.02\textwidth}{0.02\textwidth} &Grapes_untrained &11271  \\
+					\crule[salinas_corrected9]{0.02\textwidth}{0.02\textwidth} &Soil_vinyard_develop &6203  \\
+					\crule[salinas_corrected10]{0.02\textwidth}{0.02\textwidth} &Corn_senesced_green_weeds &3278  \\
+					\crule[salinas_corrected11]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_4wk &1068  \\
+					\crule[salinas_corrected12]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_5wk &1927  \\
+					\crule[salinas_corrected13]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_6wk &916  \\
+					\crule[salinas_corrected14]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_7wk &1070  \\
+					\crule[salinas_corrected15]{0.02\textwidth}{0.02\textwidth} &Vinyard_untrained &7268  \\
+					\crule[salinas_corrected16]{0.02\textwidth}{0.02\textwidth} &Vinyard_vertical_trellis &1807  \\
+				\end{tabular}&
+				\begin{tabular}{ccc}
+					\toprule
+					\textit{color}&\textit{land-cover type}&\textit{number}\\
+					\hline
+					\crule[salinasA_corrected1]{0.02\textwidth}{0.02\textwidth} &Brocoli_green_weeds_1 &391  \\
+					\crule[salinasA_corrected2]{0.02\textwidth}{0.02\textwidth} &Corn_senesced_green_weeds &1343  \\
+					\crule[salinasA_corrected3]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_4wk &616  \\
+					\crule[salinasA_corrected4]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_5wk &1525  \\
+					\crule[salinasA_corrected5]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_6wk &674  \\
+					\crule[salinasA_corrected6]{0.02\textwidth}{0.02\textwidth} &Lettuce_romaine_7wk &799  \\
+					\\
+					\\
+					\\
+					\\
+					\\
+					\\
+					\\
+					\\
+					\\
+					\\
+				\end{tabular}\\
+				\hline
+				\bottomrule
+			\end{tabular}}
 		\caption{Number of samples in the two Salinas scene dataset.}
 		\label{salinas_gt}
 	\end{table}
 
+
 \end{document}
+
+
+
+
