@@ -144,7 +144,7 @@ class ProbMap:
 		self.map = pickle.load(f)
 
 	def drawGt(self):
-		f=open("wtf.txt","w+")
+		f=open("txt/wtf.txt", "w+")
 		plt.figure()
 		groundTruth = np.zeros(shape=(self.height, self.width),dtype=int)
 		# print(self.height,self.width,"8888888888")
@@ -301,7 +301,7 @@ if __name__ == "__main__":
 	probMap = ProbMap(dataloader.numClasses, ".\\save\\formal0311\\data\\DCCN\\p5\\sa\\1",
 	                  allLabeledLabel, allLabeledIndex, dataloader.height, dataloader.width, dataloader.trainIndex)
 	probMap.restore()
-	with open("seeData.txt","w+") as f:
+	with open("txt/seeData.txt", "w+") as f:
 		for i in dataloader.label:
 			for j in i :
 				print("%3d"%j,end="",file=f)

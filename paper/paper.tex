@@ -199,9 +199,9 @@
 	\section{EXPERIMENT}\label{sec:experiment}
 	In this section, we showed and analyzed the training result.
 	We compared our model with six neural network based algorithms i.e.,
-	1D CNN\cite{hu2015deep},
-	2D CNN\cite{sharma2016hyperspectral},
+	semi-supervised 2D CNN\cite{liu2017semi},
 	3D CNN\cite{hamida20183},
+	multi-scale 3D CNN(3D CNN-MS)\cite{he2017multi},
 	3D FCN\cite{lee2016contextual},
 	CNN-MRF\cite{cao2018hyperspectral},
 	the CapsNet that is identical to our DCCN model except the spectral channel, and the machine learning algorithm
@@ -209,6 +209,8 @@
 	The competing neural network based algorithms are trained using the best network structure and hyper-parameters
 	proposed by the authors in their papers, and the SVM algorithm was trained using 10\% of the total labeled pixels
 	as the DCCN model.
+	In order to reduce the effect of accidental errors, we did the same experiment with identical parameters five times
+	on each model.
 	The accuracy metrics we used include overall accuracy(OA), average accuracy(AA) and Kappa Coefficient($\kappa$).
 
 	\subsection{Dataset Introduction}\label{subsec:dataset-introduction}
@@ -222,15 +224,15 @@
 		\item \textit{Pavia Center and University} These are two scenes acquired by the ROSIS sensor during a flight
 		campaign over Pavia, northern Italy.
 		The number of spectral bands is 102 for Pavia Centre and 103 for Pavia University.
-		Pavia Centre is a 1096*1096 pixels image, and Pavia University is 610*610 pixels, but some of the samples in
+		Pavia Centre is a 1096×1096 pixels image, and Pavia University is 610×610 pixels, but some of the samples in
 		both images contain no information and have to be discarded before the analysis, so the final picture size is
-		1096*715 and 610*340.
+		1096×715 and 610×340.
 		The geometric resolution is 1.3 meters.
 		Both image has 9 different ground truth classes each.
 		\item \textit{Salinas Scene} The Salinas scene was collected by the 224-band AVIRIS sensor over Salinas Valley,
 		California, and is characterized by high spatial resolution (3.7-meter pixels).
-		The Salinas Valley dataset is a 512*217 pixels image, and the Salinas A is a subset of the Salinas Valley
-		containing 86*83 pixels.
+		The Salinas Valley dataset is a 512×217 pixels image, and the Salinas A is a subset of the Salinas Valley
+		containing 86×83 pixels.
 		The Salinas scene dataset has been discarded 20 water absorption bands from the original image, so there's 204
 		bands left in both of the tow dataset.
 		The Salinas Valley dataset has 16 different classes but the Salinas A only has 6 different classes.
@@ -375,7 +377,7 @@
 	First of all, we listed the quantitative classification assessment using the PU, PC, SV and SA dataset considering
 	SVM,
 	1D CNN\cite{hu2015deep},
-	2D CNN\cite{sharma2016hyperspectral},
+	2D CNN\cite{liu2017semi},
 	3D CNN\cite{hamida20183},
 	3D FCN\cite{lee2016contextual},
 	CNN-MRF\cite{cao2018hyperspectral},
@@ -401,7 +403,7 @@
 				\hline
 				{SVM}\\
 				{1D CNN\cite{hu2015deep}}\\
-				{2D CNN\cite{sharma2016hyperspectral}}\\
+				{2D CNN\cite{liu2017semi}}\\
 				{3D CNN\cite{hamida20183}}\\
 				{3D FCN\cite{lee2016contextual}}\\
 				{CNN-MRF\cite{cao2018hyperspectral}}\\
@@ -466,140 +468,140 @@
 	model after the training process.
 	\begin{figure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\label{pcpm}
 	\end{figure}
 	\begin{figure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\label{pupm}
 	\end{figure}
 	\begin{figure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\label{svpm}
 	\end{figure}
 	\begin{figure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/predictMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
 		\label{sapm}
@@ -609,140 +611,140 @@
 	figure~\ref{pcpd ,pupd,svpd,sapd}.
 	\begin{figure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\label{pcpd}
 	\end{figure}
 	\begin{figure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\label{pupd}
 	\end{figure}
 	\begin{figure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\label{svpd}
 	\end{figure}
 	\begin{figure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\begin{subfigure}{0.12\textwidth}
-			\includegraphics[width=0.95\textwidth]{pic/p5/pc/1/img/probMap.eps}
+			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
 		\label{sapd}
@@ -780,7 +782,7 @@
 	In this sector, we further explored the effect of different hyper-parameters to the DCCN\@.
 	We used the Pavia University and Salinas A dataset to train and test our model, so that we can observe the model's
 	performance on both large and small dataset.
-	We first tested the effect of different size of training set with a fixed patch size of 7*7, and then tested the
+	We first tested the effect of different size of training set with a fixed patch size of 7×7, and then tested the
 	effect of different patch sizes.
 
 

@@ -46,7 +46,7 @@ class DataLoader:
 		# print(self.height,self.width,self.bands)
 
 		self.__slice()
-		with open("seeData.txt", "w+") as f:
+		with open("txt/seeData.txt", "w+") as f:
 			last = np.shape(self.allPatch[0])
 			for a, i in enumerate(self.allPatch):
 				if last != np.shape(i):
