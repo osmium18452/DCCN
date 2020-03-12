@@ -1,13 +1,20 @@
-python ./train.py --data 1 -e 50 -r 0.1 -a 2 -l 0.0001 -m 1 --draw -d ./save/data/mar2/DCCN/id --model_path ./save/model/mar2/DCCN/id -g 1
-python ./train.py --data 2 -e 50 -r 0.1 -a 2 -l 0.0001 -m 1 --draw -d ./save/data/mar2/DCCN/pu --model_path ./save/model/mar2/DCCN/pu -g 1
-python ./train.py --data 3 -e 50 -r 0.1 -a 2 -l 0.0001 -m 1 --draw -d ./save/data/mar2/DCCN/pc --model_path ./save/model/mar2/DCCN/pc -g 1
-python ./train.py --data 4 -e 50 -r 0.1 -a 2 -l 0.0001 -m 1 --draw -d ./save/data/mar2/DCCN/sl --model_path ./save/model/mar2/DCCN/sl -g 1
-python ./train.py --data 5 -e 50 -r 0.1 -a 2 -l 0.0001 -m 1 --draw -d ./save/data/mar2/DCCN/SA --model_path ./save/model/mar2/DCCN/SA -g 1
-python ./train.py --data 6 -e 50 -r 0.1 -a 2 -l 0.0001 -m 1 --draw -d ./save/data/mar2/DCCN/KS --model_path ./save/model/mar2/DCCN/KS -g 1
-
-python ./train.py --data 1 -e 50 -r 0.1 -a 2 -l 0.0001 -m 2 --draw -d ./save/data/mar2/Caps/id --model_path ./save/model/mar2/Caps/id -g 1
-python ./train.py --data 2 -e 50 -r 0.1 -a 2 -l 0.0001 -m 2 --draw -d ./save/data/mar2/Caps/pu --model_path ./save/model/mar2/Caps/pu -g 1
-python ./train.py --data 3 -e 50 -r 0.1 -a 2 -l 0.0001 -m 2 --draw -d ./save/data/mar2/Caps/pc --model_path ./save/model/mar2/Caps/pc -g 1
-python ./train.py --data 4 -e 50 -r 0.1 -a 2 -l 0.0001 -m 2 --draw -d ./save/data/mar2/Caps/sl --model_path ./save/model/mar2/Caps/sl -g 1
-python ./train.py --data 5 -e 50 -r 0.1 -a 2 -l 0.0001 -m 2 --draw -d ./save/data/mar2/Caps/SA --model_path ./save/model/mar2/Caps/SA -g 1
-python ./train.py --data 6 -e 50 -r 0.1 -a 2 -l 0.0001 -m 2 --draw -d ./save/data/mar2/Caps/KS --model_path ./save/model/mar2/Caps/KS -g 1
+python ./train.py -g 2 -e 100 --data 2 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/pu/1/ --model_path ./save/0312/model/cao/p5/pu/1/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/pu/sum --draw
+python ./train.py -g 2 -e 100 --data 2 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/pu/2/ --model_path ./save/0312/model/cao/p5/pu/2/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/pu/sum --dont_save_data
+python ./train.py -g 2 -e 100 --data 2 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/pu/3/ --model_path ./save/0312/model/cao/p5/pu/3/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/pu/sum --dont_save_data
+python ./train.py -g 2 -e 100 --data 2 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/pu/4/ --model_path ./save/0312/model/cao/p5/pu/4/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/pu/sum --dont_save_data
+python ./train.py -g 2 -e 100 --data 2 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/pu/5/ --model_path ./save/0312/model/cao/p5/pu/5/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/pu/sum --dont_save_data
+python ./train.py -g 2 -e 100 --data 3 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/pc/1/ --model_path ./save/0312/model/cao/p5/pc/1/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/pc/sum --draw
+python ./train.py -g 2 -e 100 --data 3 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/pc/2/ --model_path ./save/0312/model/cao/p5/pc/2/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/pc/sum --dont_save_data
+python ./train.py -g 2 -e 100 --data 3 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/pc/3/ --model_path ./save/0312/model/cao/p5/pc/3/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/pc/sum --dont_save_data
+python ./train.py -g 2 -e 100 --data 3 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/pc/4/ --model_path ./save/0312/model/cao/p5/pc/4/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/pc/sum --dont_save_data
+python ./train.py -g 2 -e 100 --data 3 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/pc/5/ --model_path ./save/0312/model/cao/p5/pc/5/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/pc/sum --dont_save_data
+python ./train.py -g 2 -e 100 --data 4 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/sl/1/ --model_path ./save/0312/model/cao/p5/sl/1/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/sl/sum --draw
+python ./train.py -g 2 -e 100 --data 4 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/sl/2/ --model_path ./save/0312/model/cao/p5/sl/2/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/sl/sum --dont_save_data
+python ./train.py -g 2 -e 100 --data 4 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/sl/3/ --model_path ./save/0312/model/cao/p5/sl/3/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/sl/sum --dont_save_data
+python ./train.py -g 2 -e 100 --data 4 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/sl/4/ --model_path ./save/0312/model/cao/p5/sl/4/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/sl/sum --dont_save_data
+python ./train.py -g 2 -e 100 --data 4 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/sl/5/ --model_path ./save/0312/model/cao/p5/sl/5/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/sl/sum --dont_save_data
+python ./train.py -g 2 -e 100 --data 5 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/sa/1/ --model_path ./save/0312/model/cao/p5/sa/1/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/sa/sum --draw
+python ./train.py -g 2 -e 100 --data 5 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/sa/2/ --model_path ./save/0312/model/cao/p5/sa/2/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/sa/sum --dont_save_data
+python ./train.py -g 2 -e 100 --data 5 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/sa/3/ --model_path ./save/0312/model/cao/p5/sa/3/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/sa/sum --dont_save_data
+python ./train.py -g 2 -e 100 --data 5 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/sa/4/ --model_path ./save/0312/model/cao/p5/sa/4/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/sa/sum --dont_save_data
+python ./train.py -g 2 -e 100 --data 5 -l 0.0001 -p 7 -r 0.1 -m 3 -d ./save/0312/data/cao/p5/sa/5/ --model_path ./save/0312/model/cao/p5/sa/5/ --first_layer 8 --second_layer 16 --use_best_model --sum_path ./save/0312/data/cao/p5/sa/sum --dont_save_data

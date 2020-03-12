@@ -5,7 +5,7 @@ import capslayer as cl
 import os
 import argparse
 from dataloader import DataLoader
-from model import DCCapsNet, CapsNet
+from model import DCCapsNet, CapsNet, conv_net
 from utils import LENGTH, calOA, selectData, calMixMatrix, calAA, calKappa, TQDM_ASCII
 from postProcess import TrainProcess, ProbMap
 
@@ -82,9 +82,12 @@ k = tf.placeholder(dtype=tf.float32)
 if args.model == 1:
 	pred = DCCapsNet(x, w, k, dataloader.numClasses, FIRST_LAYER, SECOND_LAYER)
 	print("USING DCCAPS***************************************")
-else:
+elif args.model==2:
 	pred = CapsNet(x, dataloader.numClasses)
 	print("USING CAPS*****************************************")
+else:
+	pred=conv_net(x,dataloader.numClasses)
+	print("USING CONV*****************************************")
 pred = tf.divide(pred, tf.reduce_sum(pred, 1, keep_dims=True))
 
 loss = tf.reduce_mean(cl.losses.margin_loss(y, pred))

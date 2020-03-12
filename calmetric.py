@@ -7,7 +7,7 @@ if __name__ == "__main__":
 	parser.add_argument("-d", "--directory")
 	args = parser.parse_args()
 	"./save/0312309/dccn/p7/pc/sum/sum.txt"
-	with open("./save/0312/he/sa/data/sum.txt", "r") as f:
+	with open("./save/0312/liu/pc/data/sum.txt", "r") as f:
 		aa = []
 		oa = []
 		kappa = []

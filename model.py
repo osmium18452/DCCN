@@ -1,6 +1,7 @@
 import tensorflow as tf
 import capslayer as cl
 import numpy as np
+from tensorflow.contrib import slim
 
 
 def DCCapsNet(patch, spectrum, k, output, firstDimension=6,secondDimension=8):
@@ -98,3 +99,18 @@ def CapsNet(net, output):
 		routing_method="DynamicRouting"
 	)
 	return rt_probs
+
+def conv_net(net,num_classes):
+	with slim.arg_scope([slim.conv2d, slim.fully_connected],
+	                    activation_fn=tf.nn.relu):
+		net = slim.conv2d(net, 300, 3, padding='VALID',
+		                  weights_initializer=tf.contrib.layers.xavier_initializer())
+		net = slim.max_pool2d(net,2,padding='SAME')
+		net = slim.conv2d(net, 200, 3, padding='VALID',
+		                  weights_initializer=tf.contrib.layers.xavier_initializer())
+		net = slim.max_pool2d(net,2,padding='SAME')
+		net = slim.flatten(net)
+		net = slim.fully_connected(net,200)
+		net = slim.fully_connected(net,100)
+		logits = slim.fully_connected(net, num_classes, activation_fn=None)
+	return logits
