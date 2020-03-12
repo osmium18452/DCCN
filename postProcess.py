@@ -120,10 +120,7 @@ class ProbMap:
 		unique = np.unique(map)
 		lut = np.zeros((int)(np.max(unique) + 1), dtype=np.int)
 		for it, i in enumerate(unique):
-			# print(it,i)
 			lut[i] = it
-		# print(lut)
-		# print(unique)
 		map = lut[map]
 		a = np.zeros(shape=(np.shape(map)[0], np.shape(map)[1], 3), dtype=np.uint8)
 		for i in range(np.shape(map)[0]):
