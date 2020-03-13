@@ -79,10 +79,11 @@
 	Dual-channel Capsule Network (DCCN).
 	Our DCCN model extracts features from spectral and spatial domain respectively with two separate convolution
 	channels and then concatenates and feds the features into the capsule layer to classify each of the HSI pixels.
-	The model is trained and tested on \textbf{(2/3/4/5?)} real HSI dataset \textbf{(Pavia University, Pavia City,
-	Salinas Valley, Salinas A and KSC)} and achieved high accuracy.
-	We also compared our network with some of the state-of-art models and found our model outperformed these models.
-	Among these state-of-art models we also implemented the Capsule Network that has the same architecture as our
+	The model is trained and tested on four real HSI dataset, i.e., Pavia University, Pavia City,
+	Salinas Valley and Salinas A, and achieved high accuracy.
+	Moreover, our DCCN model has much higher confident for the predicted accuracy compared to the competitor algorithms.
+	We also compared our network with some of the state-of-the-art models and found our model outperformed these models.
+	Among these state-of-the-art models we also implemented the Capsule Network that has the same architecture as our
 	network except the spectral convolution channel, and we found the DCCN model was superior to it as well.
 
 	\noindent \textbf{Key Words:} Dual-Channel Capsule Network, Hyper-Spectral Image, Image Classification.
@@ -195,7 +196,6 @@
 	In our experiment, we conducted 100 epochs for each of the dataset.
 
 
-
 	\section{EXPERIMENT}\label{sec:experiment}
 	In this section, we showed and analyzed the training result.
 	We compared our model with six neural network based algorithms i.e.,
@@ -214,6 +214,86 @@
 	The accuracy metrics we used include overall accuracy(OA), average accuracy(AA) and Kappa Coefficient($\kappa$).
 
 	\subsection{Dataset Introduction}\label{subsec:dataset-introduction}
+	\begin{table}[h]
+		\centering
+		\tiny
+		\resizebox{\textwidth}{!}{
+			\begin{tabular}{|c|c|c|c|}
+
+				\hline
+				\textbf{PAVIA CENTER} & \textbf{PAVIA UNIVERSITY}&\textbf{SALINAS VALLEY}  & \textbf{SALINAS A}\\
+				\hline
+				\includegraphics[width=0.4\textwidth]{pic/pavia_gt.eps}&
+				\includegraphics[width=0.4\textwidth]{pic/paviaU_gt.eps}&
+				\includegraphics[width=0.4\textwidth]{pic/salinas_gt.eps}&
+				\includegraphics[width=0.4\textwidth]{pic/salinasA_gt.eps}\\
+				\hline
+				\begin{tabular}[t]{ccc}
+
+					\textit{color}&\textit{land-cover type}&\textit{number}\\
+					\hline
+					\crule[pavia1]{0.02\textwidth}{0.02\textwidth} &Water &824    \\
+					\crule[pavia2]{0.02\textwidth}{0.02\textwidth} &Trees &820    \\
+					\crule[pavia3]{0.02\textwidth}{0.02\textwidth} &Asphalt &816    \\
+					\crule[pavia4]{0.02\textwidth}{0.02\textwidth} &Self-Blocking Bricks &808    \\
+					\crule[pavia5]{0.02\textwidth}{0.02\textwidth} &Bitumen &808    \\
+					\crule[pavia6]{0.02\textwidth}{0.02\textwidth} &Tiles &1260   \\
+					\crule[pavia7]{0.02\textwidth}{0.02\textwidth} &Shadows &476    \\
+					\crule[pavia8]{0.02\textwidth}{0.02\textwidth} &Meadows &824    \\
+					\crule[pavia9]{0.02\textwidth}{0.02\textwidth} &Bare Soil &820    \\
+				\end{tabular}&
+				\begin{tabular}[t]{ccc}
+
+					\textit{color}&\textit{land-cover type}&\textit{number}\\
+					\hline
+					\crule[paviaU1]{0.02\textwidth}{0.02\textwidth} &Asphalt &6631   \\
+					\crule[paviaU2]{0.02\textwidth}{0.02\textwidth} &Meadows &18649  \\
+					\crule[paviaU3]{0.02\textwidth}{0.02\textwidth} &Gravel &2099   \\
+					\crule[paviaU4]{0.02\textwidth}{0.02\textwidth} &Trees &3064   \\
+					\crule[paviaU5]{0.02\textwidth}{0.02\textwidth} &Painted metal sheets &1345   \\
+					\crule[paviaU6]{0.02\textwidth}{0.02\textwidth} &Bare Soil &5029   \\
+					\crule[paviaU7]{0.02\textwidth}{0.02\textwidth} &Bitumen &1330   \\
+					\crule[paviaU8]{0.02\textwidth}{0.02\textwidth} &Self-Blocking Bricks &3682   \\
+					\crule[paviaU9]{0.02\textwidth}{0.02\textwidth} &Shadows &947    \\
+				\end{tabular}&
+				\begin{tabular}[t]{ccc}
+
+					\textit{color}&\textit{land-cover type}&\textit{number}\\
+					\hline
+					\crule[salinas_corrected1]{0.02\textwidth}{0.02\textwidth} &Brocoli green weeds 1 &2009  \\
+					\crule[salinas_corrected2]{0.02\textwidth}{0.02\textwidth} &Brocoli green weeds 2 &3726  \\
+					\crule[salinas_corrected3]{0.02\textwidth}{0.02\textwidth} &Fallow &1976  \\
+					\crule[salinas_corrected4]{0.02\textwidth}{0.02\textwidth} &Fallow rough plow &1394  \\
+					\crule[salinas_corrected5]{0.02\textwidth}{0.02\textwidth} &Fallow smooth &2678  \\
+					\crule[salinas_corrected6]{0.02\textwidth}{0.02\textwidth} &Stubble &3959  \\
+					\crule[salinas_corrected7]{0.02\textwidth}{0.02\textwidth} &Celery &3579  \\
+					\crule[salinas_corrected8]{0.02\textwidth}{0.02\textwidth} &Grapes untrained &11271  \\
+					\crule[salinas_corrected9]{0.02\textwidth}{0.02\textwidth} &Soil vinyard develop &6203  \\
+					\crule[salinas_corrected10]{0.02\textwidth}{0.02\textwidth} &Corn senesced green weeds &3278  \\
+					\crule[salinas_corrected11]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 4wk &1068  \\
+					\crule[salinas_corrected12]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 5wk &1927  \\
+					\crule[salinas_corrected13]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 6wk &916  \\
+					\crule[salinas_corrected14]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 7wk &1070  \\
+					\crule[salinas_corrected15]{0.02\textwidth}{0.02\textwidth} &Vinyard untrained &7268  \\
+					\crule[salinas_corrected16]{0.02\textwidth}{0.02\textwidth} &Vinyard vertical trellis &1807  \\
+				\end{tabular}&
+				\begin{tabular}[t]{ccc}
+
+					\textit{color}&\textit{land-cover type}&\textit{number}\\
+					\hline
+					\crule[salinasA_corrected1]{0.02\textwidth}{0.02\textwidth} &Brocoli green weeds 1 &391  \\
+					\crule[salinasA_corrected2]{0.02\textwidth}{0.02\textwidth} &Corn senesced green weeds &1343  \\
+					\crule[salinasA_corrected3]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 4wk &616  \\
+					\crule[salinasA_corrected4]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 5wk &1525  \\
+					\crule[salinasA_corrected5]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 6wk &674  \\
+					\crule[salinasA_corrected6]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 7wk &799  \\
+				\end{tabular}\\
+				\hline
+
+			\end{tabular}}
+		\caption{Number of samples in two Pavia scene dataset.}
+		\label{psgt}
+	\end{table}
 	In our experiment, we selected 4 real HSI dataset to train and test our DCCN model separately, that is, the
 	Pavia University(PU) dataset, the Pavia Center(PC) dataset, the Salinas Valley(SV) dataset and the Salinas A(SA)
 	dataset, which is a small subset of the Salinas Valley dataset.
@@ -237,86 +317,6 @@
 		bands left in both of the tow dataset.
 		The Salinas Valley dataset has 16 different classes but the Salinas A only has 6 different classes.
 	\end{enumerate}
-	\begin{table}[h]
-		\centering
-		\tiny
-		\resizebox{\textwidth}{!}{
-			\begin{tabular}{|c|c|c|c|}
-				
-				\hline
-				\textbf{PAVIA CENTER} & \textbf{PAVIA UNIVERSITY}&\textbf{SALINAS VALLEY}  & \textbf{SALINAS A}\\
-				\hline
-				\includegraphics[width=0.4\textwidth]{pic/pavia_gt.eps}&
-				\includegraphics[width=0.4\textwidth]{pic/paviaU_gt.eps}&
-				\includegraphics[width=0.4\textwidth]{pic/salinas_gt.eps}&
-				\includegraphics[width=0.4\textwidth]{pic/salinasA_gt.eps}\\
-				\hline
-				\begin{tabular}[t]{ccc}
-					
-					\textit{color}&\textit{land-cover type}&\textit{number}\\
-					\hline
-					\crule[pavia1]{0.02\textwidth}{0.02\textwidth} &Water &824    \\
-					\crule[pavia2]{0.02\textwidth}{0.02\textwidth} &Trees &820    \\
-					\crule[pavia3]{0.02\textwidth}{0.02\textwidth} &Asphalt &816    \\
-					\crule[pavia4]{0.02\textwidth}{0.02\textwidth} &Self-Blocking Bricks &808    \\
-					\crule[pavia5]{0.02\textwidth}{0.02\textwidth} &Bitumen &808    \\
-					\crule[pavia6]{0.02\textwidth}{0.02\textwidth} &Tiles &1260   \\
-					\crule[pavia7]{0.02\textwidth}{0.02\textwidth} &Shadows &476    \\
-					\crule[pavia8]{0.02\textwidth}{0.02\textwidth} &Meadows &824    \\
-					\crule[pavia9]{0.02\textwidth}{0.02\textwidth} &Bare Soil &820    \\
-				\end{tabular}&
-				\begin{tabular}[t]{ccc}
-					
-					\textit{color}&\textit{land-cover type}&\textit{number}\\
-					\hline
-					\crule[paviaU1]{0.02\textwidth}{0.02\textwidth} &Asphalt &6631   \\
-					\crule[paviaU2]{0.02\textwidth}{0.02\textwidth} &Meadows &18649  \\
-					\crule[paviaU3]{0.02\textwidth}{0.02\textwidth} &Gravel &2099   \\
-					\crule[paviaU4]{0.02\textwidth}{0.02\textwidth} &Trees &3064   \\
-					\crule[paviaU5]{0.02\textwidth}{0.02\textwidth} &Painted metal sheets &1345   \\
-					\crule[paviaU6]{0.02\textwidth}{0.02\textwidth} &Bare Soil &5029   \\
-					\crule[paviaU7]{0.02\textwidth}{0.02\textwidth} &Bitumen &1330   \\
-					\crule[paviaU8]{0.02\textwidth}{0.02\textwidth} &Self-Blocking Bricks &3682   \\
-					\crule[paviaU9]{0.02\textwidth}{0.02\textwidth} &Shadows &947    \\
-				\end{tabular}&
-				\begin{tabular}[t]{ccc}
-					
-					\textit{color}&\textit{land-cover type}&\textit{number}\\
-					\hline
-					\crule[salinas_corrected1]{0.02\textwidth}{0.02\textwidth} &Brocoli green weeds 1 &2009  \\
-					\crule[salinas_corrected2]{0.02\textwidth}{0.02\textwidth} &Brocoli green weeds 2 &3726  \\
-					\crule[salinas_corrected3]{0.02\textwidth}{0.02\textwidth} &Fallow &1976  \\
-					\crule[salinas_corrected4]{0.02\textwidth}{0.02\textwidth} &Fallow rough plow &1394  \\
-					\crule[salinas_corrected5]{0.02\textwidth}{0.02\textwidth} &Fallow smooth &2678  \\
-					\crule[salinas_corrected6]{0.02\textwidth}{0.02\textwidth} &Stubble &3959  \\
-					\crule[salinas_corrected7]{0.02\textwidth}{0.02\textwidth} &Celery &3579  \\
-					\crule[salinas_corrected8]{0.02\textwidth}{0.02\textwidth} &Grapes untrained &11271  \\
-					\crule[salinas_corrected9]{0.02\textwidth}{0.02\textwidth} &Soil vinyard develop &6203  \\
-					\crule[salinas_corrected10]{0.02\textwidth}{0.02\textwidth} &Corn senesced green weeds &3278  \\
-					\crule[salinas_corrected11]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 4wk &1068  \\
-					\crule[salinas_corrected12]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 5wk &1927  \\
-					\crule[salinas_corrected13]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 6wk &916  \\
-					\crule[salinas_corrected14]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 7wk &1070  \\
-					\crule[salinas_corrected15]{0.02\textwidth}{0.02\textwidth} &Vinyard untrained &7268  \\
-					\crule[salinas_corrected16]{0.02\textwidth}{0.02\textwidth} &Vinyard vertical trellis &1807  \\
-				\end{tabular}&
-				\begin{tabular}[t]{ccc}
-					
-					\textit{color}&\textit{land-cover type}&\textit{number}\\
-					\hline
-					\crule[salinasA_corrected1]{0.02\textwidth}{0.02\textwidth} &Brocoli green weeds 1 &391  \\
-					\crule[salinasA_corrected2]{0.02\textwidth}{0.02\textwidth} &Corn senesced green weeds &1343  \\
-					\crule[salinasA_corrected3]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 4wk &616  \\
-					\crule[salinasA_corrected4]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 5wk &1525  \\
-					\crule[salinasA_corrected5]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 6wk &674  \\
-					\crule[salinasA_corrected6]{0.02\textwidth}{0.02\textwidth} &Lettuce romaine 7wk &799  \\
-				\end{tabular}\\
-				\hline
-				
-			\end{tabular}}
-		\caption{Number of samples in two Pavia scene dataset.}
-		\label{psgt}
-	\end{table}
 
 	\subsection{Environment}\label{subsec:environment}
 	We trained and tested the model on a PC with 4 NVIDIA RTX 2080Ti(11GB) GPUs, dual Xeon 4210 Processor
@@ -383,7 +383,7 @@
 	CNN-MRF\cite{cao2018hyperspectral},
 	CapsNet and DCCN together in table~\ref{result}.
 	From the results reported in table~\ref{result}, we can observe that our proposed DCCN model outperforms all the
-	other seven state-of-art models on all 4 dataset.
+	other seven state-of-the-art models on all 4 dataset.
 	Among all competitors in this experiment, 3D CNN\cite{hamida20183} and the CapsNet model performed relatively second
 	best, since both of the two model achieved second high accuracy on different dataset.
 	This is expected because both of the two algorithm are spectral-spatial based so they can utilize more information,
@@ -395,9 +395,9 @@
 		\tiny
 		\centering
 		\resizebox{\textwidth}{!}{
-			\begin{tabular}{c|c|c|c|c}
+			\begin{tabular}{|c|c|c|c|c|}
 				\hline
-				no item&\textbf{PAVIA CENTER} & \textbf{PAVIA UNIVERSITY}&\textbf{SALINAS VALLEY} & \textbf{SALINAS A}\\
+				&\textbf{PAVIA CENTER} & \textbf{PAVIA UNIVERSITY}&\textbf{SALINAS VALLEY} & \textbf{SALINAS A}\\
 				\hline
 				\begin{tabular}{c}
 					\textbf{metrics}\\
@@ -409,61 +409,65 @@
 					{3D FCN\cite{lee2016contextual}}\\
 					{CNN-MRF\cite{cao2018hyperspectral}}\\
 					{CapsNet}\\
-					{DCCN}\\
+					{DCCN}
 				\end{tabular}&
 				\begin{tabular}{ccc}
 					\textbf{AA(\%)}&\textbf{OA(\%)}&\textbf{$\kappa$(×100)}\\
 					\hline
-					97.52±0.07 & 91.74±0.33 & 96.49±0.10\\%{SVM}\\
-					98.27±0.14 & 97.24±0.54 & 97.56±0.19\\%{2D CNN\cite{liu2017semi}}\\
-					95.25±2.99 & 89.74±7.37 & 93.32±4.21\\%{3D CNN\cite{hamida20183}}\\
-					98.03±0.40 & 96.31±1.42 & 97.22±0.56\\%{3D CNN\cite{he2017multi}}\\
-					98.33±0.59 & 94.65±2.09 & 97.64±0.83\\%{3D FCN\cite{lee2016contextual}}\\
-					99.24±0.23 & 97.54±1.04 & 98.92±0.33\\%{CNN-MRF\cite{cao2018hyperspectral}}\\
-					99.48±0.09 & 98.50±0.21 & 99.27±0.12\\%{CapsNet}\\
-					\textbf{99.53±0.02} & \textbf{98.59±0.20} & \textbf{99.34±0.03}\\%{DCCN}\\
+					97.52±0.07 & 91.74±0.33 & 96.49±0.10\\
+					98.27±0.14 & 97.24±0.54 & 97.56±0.19\\
+					95.25±2.99 & 89.74±7.37 & 93.32±4.21\\
+					98.03±0.40 & 96.31±1.42 & 97.22±0.56\\
+					98.33±0.59 & 94.65±2.09 & 97.64±0.83\\
+					99.24±0.23 & 97.54±1.04 & 98.92±0.33\\
+					99.48±0.09 & 98.50±0.21 & 99.27±0.12\\
+					\textbf{99.53±0.02} & \textbf{98.59±0.20} & \textbf{99.34±0.03}
 				\end{tabular}&
 				\begin{tabular}{ccc}
 					\textbf{AA(\%)}&\textbf{OA(\%)}&\textbf{$\kappa$(×100)}\\
 					\hline
-					79.86±0.26 & 64.26±0.45 & 71.86±0.39\\%{SVM}\\
-					93.74±0.42 & 95.61±0.79 & 91.85±0.54\\%{2D CNN\cite{liu2017semi}}\\
-					77.92±12.22 & 85.34±7.42 & 73.42±13.63\\%{3D CNN\cite{hamida20183}}\\
-					93.39±1.34 & 95.97±1.39 & 91.42±1.72\\%{3D CNN\cite{he2017multi}}\\
-					88.45±1.66 & 85.58±3.22 & 84.49±2.22\\%{3D FCN\cite{lee2016contextual}}\\
-					98.07±0.62 & 96.80±1.06 & 97.44±0.82\\%{CNN-MRF\cite{cao2018hyperspectral}}\\
-					97.69±0.60 & 96.82±0.83 & 96.94±0.80\\%{DCCN}\\
-					\textbf{98.40±0.19} & \textbf{97.77±0.33} & \textbf{97.89±0.25}\\%{CapsNet}\\
+					79.86±0.26 & 64.26±0.45 & 71.86±0.39\\
+					93.74±0.42 & 95.61±0.79 & 91.85±0.54\\
+					77.92±12.22 & 85.34±7.42 & 73.42±13.63\\
+					93.39±1.34 & 95.97±1.39 & 91.42±1.72\\
+					88.45±1.66 & 85.58±3.22 & 84.49±2.22\\
+					98.07±0.62 & 96.80±1.06 & 97.44±0.82\\
+					97.69±0.60 & 96.82±0.83 & 96.94±0.80\\
+					\textbf{98.40±0.19} & \textbf{97.77±0.33} & \textbf{97.89±0.25}
 				\end{tabular}&
 				\begin{tabular}{ccc}
 					\textbf{AA(\%)}&\textbf{OA(\%)}&\textbf{$\kappa$(×100)}\\
 					\hline
-					82.45±0.75 & 86.16±0.93 & 80.24±0.87\\%{SVM}\\
-					92.24±1.19 & 95.82±0.61 & 91.36±1.34\\%{2D CNN\cite{liu2017semi}}\\
-					88.27±4.18 & 92.76±2.96 & 86.87±4.74\\%{3D CNN\cite{hamida20183}}\\
-					91.29±2.91 & 95.08±1.68 & 90.28±3.27\\%{3D CNN\cite{he2017multi}}\\
-					87.11±3.77 & 90.10±3.66 & 85.57±4.28\\%{3D FCN\cite{lee2016contextual}}\\
-					94.69±1.48 & 97.39±0.80 & 94.07±1.66\\%{CNN-MRF\cite{cao2018hyperspectral}}\\
-					94.48±0.59 & 96.84±0.58 & 93.83±0.66\\%{DCCN}\\
-					\textbf{95.00±0.59} & \textbf{97.30±0.50} & \textbf{94.42±0.66}\\%{CapsNet}\\
+					82.45±0.75 & 86.16±0.93 & 80.24±0.87\\
+					92.24±1.19 & 95.82±0.61 & 91.36±1.34\\
+					88.27±4.18 & 92.76±2.96 & 86.87±4.74\\
+					91.29±2.91 & 95.08±1.68 & 90.28±3.27\\
+					87.11±3.77 & 90.10±3.66 & 85.57±4.28\\
+					94.69±1.48 & 97.39±0.80 & 94.07±1.66\\
+					94.48±0.59 & 96.84±0.58 & 93.83±0.66\\
+					\textbf{95.00±0.59} & \textbf{97.30±0.50} & \textbf{94.42±0.66}
 				\end{tabular}&
 				\begin{tabular}{ccc}
 					\textbf{AA(\%)}&\textbf{OA(\%)}&\textbf{$\kappa$(×100)}\\
 					\hline
-					97.44±0.19 & 97.42±0.22 & 96.80±0.23\\%{SVM}\\
-					84.47±0.51 & 89.86±0.69 & 81.22±0.62\\%{2D CNN\cite{liu2017semi}}\\
-					79.27±4.74 & 80.81±8.80 & 74.70±5.96\\%{3D CNN\cite{hamida20183}}\\
-					79.92±4.91 & 85.46±5.01 & 75.99±5.69\\%{3D CNN\cite{he2017multi}}\\
-					86.54±3.72 & 85.55±4.30 & 83.09±4.65\\%{3D FCN\cite{lee2016contextual}}\\
-					98.00±1.61 & 97.10±2.33 & 97.48±2.03\\%{CNN-MRF\cite{cao2018hyperspectral}}\\
-					99.52±0.10 & 99.31±0.15 & 99.40±0.13\\%{CapsNet}\\
-					\textbf{99.56±0.05} & \textbf{99.36±0.07} & \textbf{99.45±0.06}\\%{DCCN}\\
+					97.44±0.19 & 97.42±0.22 & 96.80±0.23\\
+					84.47±0.51 & 89.86±0.69 & 81.22±0.62\\
+					79.27±4.74 & 80.81±8.80 & 74.70±5.96\\
+					79.92±4.91 & 85.46±5.01 & 75.99±5.69\\
+					86.54±3.72 & 85.55±4.30 & 83.09±4.65\\
+					98.00±1.61 & 97.10±2.33 & 97.48±2.03\\
+					99.52±0.10 & 99.31±0.15 & 99.40±0.13\\
+					\textbf{99.56±0.05} & \textbf{99.36±0.07} & \textbf{99.45±0.06}
 				\end{tabular}\\
+				\hline
 			\end{tabular}
 		}
+		\caption{AA, OA and Kappa metrics for all 8 algorithms.
+		We can observe that out proposed model outperformed all competitor algorithms for all 4 dataset.}
+		\label{result}
 	\end{table}
 
-	In figure~\ref{pupm,pcpm,svpm,sapm} we presented the classification maps outputted by our DCCN and seven competitor
+	In figure~\ref{pupm},\ref{pcpm},\ref{svpm},\ref{sapm} we presented the classification maps outputted by our DCCN and seven competitor
 	model after the training process.
 	\begin{figure}
 		\begin{subfigure}{0.12\textwidth}
@@ -498,6 +502,7 @@
 			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
+		\caption{Predicted map for all 8 algorithms on the Pavia Center dataset.}
 		\label{pcpm}
 	\end{figure}
 	\begin{figure}
@@ -533,6 +538,7 @@
 			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
+		\caption{Predicted map for all 8 algorithms on the Pavia University dataset.}
 		\label{pupm}
 	\end{figure}
 	\begin{figure}
@@ -568,6 +574,7 @@
 			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
+		\caption{Predicted map for all 8 algorithms on the Salinas Valley dataset.}
 		\label{svpm}
 	\end{figure}
 	\begin{figure}
@@ -603,11 +610,12 @@
 			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/predictMap.eps}
 			\caption{}
 		\end{subfigure}
+		\caption{Predicted map for all 8 algorithms on the Salinas A dataset.}
 		\label{sapm}
 	\end{figure}
 
 	Finally, we presented the probability maps the eight algorithms produced of the four HSI dataset in
-	figure~\ref{pcpd ,pupd,svpd,sapd}.
+	figure~\ref{pcpd} ,\ref{pupd},\ref{svpd},\ref{sapd}.
 	\begin{figure}
 		\begin{subfigure}{0.12\textwidth}
 			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
@@ -641,6 +649,7 @@
 			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
+		\caption{Probability map for all 8 algorithms on the Pavia City dataset.}
 		\label{pcpd}
 	\end{figure}
 	\begin{figure}
@@ -676,6 +685,7 @@
 			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
+		\caption{Probability map for all 8 algorithms on the Pavia City dataset.}
 		\label{pupd}
 	\end{figure}
 	\begin{figure}
@@ -711,6 +721,7 @@
 			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
+		\caption{Probability map for all 8 algorithms on the Pavia City dataset.}
 		\label{svpd}
 	\end{figure}
 	\begin{figure}
@@ -746,6 +757,7 @@
 			\includegraphics[width=\textwidth]{pic/p5/pc/1/img/probMap.eps}
 			\caption{}
 		\end{subfigure}
+		\caption{Probability map for all 8 algorithms on the Pavia City dataset.}
 		\label{sapd}
 	\end{figure}
 

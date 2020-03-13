@@ -144,7 +144,7 @@ class ProbMap:
 		self.map = pickle.load(f)
 
 	def drawGt(self):
-		f=open("txt/wtf.txt", "w+")
+		# f=open("txt/wtf.txt", "w+")
 		plt.figure()
 		groundTruth = np.zeros(shape=(self.height, self.width),dtype=int)
 		# print(self.height,self.width,"8888888888")
