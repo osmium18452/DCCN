@@ -4,6 +4,7 @@ import numpy as np
 import pickle as pkl
 import seaborn as sns
 import matplotlib.pyplot as plt
+import argparse
 
 
 def load(path):
@@ -27,26 +28,34 @@ def convertToColor(map):
 			a[i][j] = palette[map[i][j]]
 	return a
 
+def draw(pic):
+	pass
+
 
 if __name__ == "__main__":
+	parser=argparse.ArgumentParser()
+	parser.add_argument("-d","--data",default="sa")
+	args=parser.parse_args()
 	dpi = 100
 	dic = {"pc": 3, "pu": 2, "sl": 4, "sa": 5}
-	path = "./save/0312309/dccn/p7/sa/1/data/probmap.pkl"
-	map = load(path)
-	map = np.argmax(map, axis=1)
-	currentPx = 0
-	pathName, matName = selectData(5)
-	dataloader = DataLoader(pathName, matName, 7, 0.1, 1)
-	index = dataloader.loadAllLabeledData()[-1]
-	gt = np.zeros((dataloader.height, dataloader.width))
-	for i in range(len(map)):
-		idx = index[i]
-		h = idx // dataloader.width
-		w = idx % dataloader.width
-		gt[h][w] = map[i] + 1
-	plt.figure(figsize=(dataloader.width*5/dpi, dataloader.height*5/dpi))
-	plt.tick_params(axis='both', which='both', bottom=False, top=False, labelbottom=False, right=False, left=False,
-	                labelleft=False)
-	plt.imshow(convertToColor(gt))
-	# plt.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0)
-	plt.show()
+	for i in (args.data,):
+		path = "./save/0312309/data/DCCN/p7/"+i+"/1/data/probmap.pkl"
+		map = load(path)
+		map = np.argmax(map, axis=1)
+		currentPx = 0
+		pathName, matName = selectData(dic[i])
+		dl = DataLoader(pathName, matName, 7, 0.1, 1)
+		index = dl.loadAllLabeledData()[-1]
+		gt = np.zeros((dl.height, dl.width))
+		for i in range(len(map)):
+			idx = index[i]
+			h = idx // dl.width
+			w = idx % dl.width
+			gt[h][w] = map[i] + 1
+		plt.figure(figsize=(dl.width * 5 / dpi, dl.height * 5 / dpi))
+		plt.tick_params(axis='both', which='both', bottom=False, top=False, labelbottom=False, right=False, left=False,
+						labelleft=False)
+		plt.imshow(convertToColor(gt))
+		# plt.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0)
+		plt.show()
+		del(dl)
