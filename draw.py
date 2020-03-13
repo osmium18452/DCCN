@@ -39,13 +39,16 @@ if __name__ == "__main__":
 	dpi = 100
 	dic = {"pc": 3, "pu": 2, "sl": 4, "sa": 5}
 	for i in (args.data,):
-		path = "./save/0312309/data/DCCN/p7/"+i+"/1/data/probmap.pkl"
-		map = load(path)
-		map = np.argmax(map, axis=1)
+		# path = "./save/0312309/data/DCCN/p7/"+i+"/1/data/probmap.pkl"
+		path="./save/0312309/dccn/p7/sa/1/data/probmap.pkl"
+		pmap = load(path)
+		map = np.argmax(pmap, axis=1)
 		currentPx = 0
 		pathName, matName = selectData(dic[i])
 		dl = DataLoader(pathName, matName, 7, 0.1, 1)
 		index = dl.loadAllLabeledData()[-1]
+		grdt=dl.label
+		print(np.max(grdt))
 		gt = np.zeros((dl.height, dl.width))
 		for i in range(len(map)):
 			idx = index[i]
@@ -56,6 +59,16 @@ if __name__ == "__main__":
 		plt.tick_params(axis='both', which='both', bottom=False, top=False, labelbottom=False, right=False, left=False,
 						labelleft=False)
 		plt.imshow(convertToColor(gt))
-		# plt.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0)
+		pm=np.zeros((dl.height,dl.width))
+		for i in range(len(map)):
+			idx=index[i]
+			h = idx // dl.width
+			w = idx % dl.width
+			# print(h,w)
+			pm[h][w]=pmap[i][grdt[h][w]-1]
+		plt.figure(figsize=(dl.width * 5 / dpi, dl.height * 5 / dpi))
+		plt.tick_params(axis='both', which='both', bottom=False, top=False, labelbottom=False, right=False, left=False,
+		                labelleft=False)
+		plt.imshow(pm)
 		plt.show()
 		del(dl)
