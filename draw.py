@@ -5,6 +5,7 @@ import pickle as pkl
 import seaborn as sns
 import matplotlib.pyplot as plt
 import argparse
+import os
 
 
 def load(path):
@@ -38,9 +39,13 @@ if __name__ == "__main__":
 	args=parser.parse_args()
 	dpi = 100
 	dic = {"pc": 3, "pu": 2, "sl": 4, "sa": 5}
+	if not os.path.exists("save/0313/img/dccn/"):
+		os.makedirs("save/0313/img/dccn/")
 	for i in (args.data,):
-		# path = "./save/0312309/data/DCCN/p7/"+i+"/1/data/probmap.pkl"
-		path="./save/0312309/dccn/p7/sa/1/data/probmap.pkl"
+		path = "./save/0312309/data/DCCN/p7/"+i+"/1/data/probmap.pkl"
+		spd="save/0313/img/dccn/"+i+"pdm.eps"
+		spb = "save/0313/img/dccn/" + i + "pbm.eps"
+		# path="./save/0312309/dccn/p7/sa/1/data/probmap.pkl"
 		pmap = load(path)
 		map = np.argmax(pmap, axis=1)
 		currentPx = 0
@@ -59,6 +64,8 @@ if __name__ == "__main__":
 		plt.tick_params(axis='both', which='both', bottom=False, top=False, labelbottom=False, right=False, left=False,
 						labelleft=False)
 		plt.imshow(convertToColor(gt))
+		sv = plt.gcf()
+		sv.savefig(spd, format="eps", dpi=dpi)
 		pm=np.zeros((dl.height,dl.width))
 		for i in range(len(map)):
 			idx=index[i]
@@ -70,5 +77,5 @@ if __name__ == "__main__":
 		plt.tick_params(axis='both', which='both', bottom=False, top=False, labelbottom=False, right=False, left=False,
 		                labelleft=False)
 		plt.imshow(pm)
-		plt.show()
-		del(dl)
+		sv = plt.gcf()
+		sv.savefig(spb, format="eps", dpi=dpi)
