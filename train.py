@@ -55,12 +55,12 @@ SUM_PATH=args.sum_path
 
 os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
 if not os.path.exists(DIRECTORY):
-	os.makedirs(os.path.join(DIRECTORY, "img"))
-	os.makedirs(os.path.join(DIRECTORY, "data"))
+    os.makedirs(os.path.join(DIRECTORY, "img"))
+    os.makedirs(os.path.join(DIRECTORY, "data"))
 if not os.path.exists(MODEL_DIRECTORY):
-	os.makedirs(MODEL_DIRECTORY)
+    os.makedirs(MODEL_DIRECTORY)
 if not os.path.exists(SUM_PATH):
-	os.makedirs(SUM_PATH)
+    os.makedirs(SUM_PATH)
 
 modelSavePath = os.path.join(MODEL_DIRECTORY, "model.ckpt")
 imgSavePath = os.path.join(DIRECTORY, "img")
@@ -80,14 +80,14 @@ y = tf.placeholder(shape=[None, dataloader.numClasses], dtype=tf.float32)
 k = tf.placeholder(dtype=tf.float32)
 
 if args.model == 1:
-	pred = DCCapsNet(x, w, k, dataloader.numClasses, FIRST_LAYER, SECOND_LAYER)
-	print("USING DCCAPS***************************************")
+    pred = DCCapsNet(x, w, k, dataloader.numClasses, FIRST_LAYER, SECOND_LAYER)
+    print("USING DCCAPS***************************************")
 elif args.model==2:
-	pred = CapsNet(x, dataloader.numClasses)
-	print("USING CAPS*****************************************")
+    pred = CapsNet(x, dataloader.numClasses)
+    print("USING CAPS*****************************************")
 else:
-	pred=conv_net(x,dataloader.numClasses)
-	print("USING CONV*****************************************")
+    pred=conv_net(x,dataloader.numClasses)
+    print("USING CONV*****************************************")
 pred = tf.divide(pred, tf.reduce_sum(pred, 1, keep_dims=True))
 
 loss = tf.reduce_mean(cl.losses.margin_loss(y, pred))
@@ -98,129 +98,129 @@ init = tf.global_variables_initializer()
 saver = tf.train.Saver()
 
 with tf.Session() as sess:
-	leastLoss = 100.0
-	if RESTORE or PREDICT_ONLY:
-		saver.restore(sess, modelSavePath)
-	else:
-		sess.run(init)
+    leastLoss = 100.0
+    if RESTORE or PREDICT_ONLY:
+        saver.restore(sess, modelSavePath)
+    else:
+        sess.run(init)
 
-	if not PREDICT_ONLY:
-		trainProcess = TrainProcess(DIRECTORY)
-		for epoch in range(EPOCHS):
-			if epoch % 5 == 0:
-				permutation = np.random.permutation(trainPatch.shape[0])
-				trainPatch = trainPatch[permutation, :, :, :]
-				trainSpectrum = trainSpectrum[permutation, :]
-				trainLabel = trainLabel[permutation, :]
+    if not PREDICT_ONLY:
+        trainProcess = TrainProcess(DIRECTORY)
+        for epoch in range(EPOCHS):
+            if epoch % 5 == 0:
+                permutation = np.random.permutation(trainPatch.shape[0])
+                trainPatch = trainPatch[permutation, :, :, :]
+                trainSpectrum = trainSpectrum[permutation, :]
+                trainLabel = trainLabel[permutation, :]
 
-			iter = dataloader.trainNum // BATCH_SIZE
-			with tqdm(total=iter, desc="epoch %3d/%3d" % (epoch + 1, EPOCHS), ncols=LENGTH, ascii=TQDM_ASCII) as pbar:
-				for i in range(iter):
-					batch_w = trainSpectrum[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :]
-					batch_x = trainPatch[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :, :]
-					batch_y = trainLabel[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :]
-					_, batchLoss, trainAcc = sess.run([optimizer, loss, accuracy],
-													  feed_dict={w: batch_w, x: batch_x, y: batch_y, k: DROP_OUT})
-					pbar.set_postfix_str(
-						"loss: %.6f, accuracy:%.2f, testLoss:-.---, testAcc:-.--" % (batchLoss, trainAcc))
-					pbar.update(1)
+            iter = dataloader.trainNum // BATCH_SIZE
+            with tqdm(total=iter, desc="epoch %3d/%3d" % (epoch + 1, EPOCHS), ncols=LENGTH, ascii=TQDM_ASCII) as pbar:
+                for i in range(iter):
+                    batch_w = trainSpectrum[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :]
+                    batch_x = trainPatch[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :, :]
+                    batch_y = trainLabel[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :]
+                    _, batchLoss, trainAcc = sess.run([optimizer, loss, accuracy],
+                                                      feed_dict={w: batch_w, x: batch_x, y: batch_y, k: DROP_OUT})
+                    pbar.set_postfix_str(
+                        "loss: %.6f, accuracy:%.2f, testLoss:-.---, testAcc:-.--" % (batchLoss, trainAcc))
+                    pbar.update(1)
 
-					if i == 0 and epoch == 0:
-						idx = np.random.choice(dataloader.testNum, size=BATCH_SIZE, replace=False)
-						test_batch_w = testSpectrum[idx, :, :]
-						test_batch_x = testPatch[idx, :, :, :]
-						test_batch_y = testLabel[idx, :]
-						ac, ls = sess.run([accuracy, loss],
-										  feed_dict={w: test_batch_w, x: test_batch_x, y: test_batch_y, k: 1})
-						trainProcess.addData(batchLoss, trainAcc, ls, ac)
+                    if i == 0 and epoch == 0:
+                        idx = np.random.choice(dataloader.testNum, size=BATCH_SIZE, replace=False)
+                        test_batch_w = testSpectrum[idx, :, :]
+                        test_batch_x = testPatch[idx, :, :, :]
+                        test_batch_y = testLabel[idx, :]
+                        ac, ls = sess.run([accuracy, loss],
+                                          feed_dict={w: test_batch_w, x: test_batch_x, y: test_batch_y, k: 1})
+                        trainProcess.addData(batchLoss, trainAcc, ls, ac)
 
-				if batchLoss < leastLoss:
-					saver.save(sess, save_path=modelSavePath)
-					leastLoss = batchLoss
+                if batchLoss < leastLoss:
+                    saver.save(sess, save_path=modelSavePath)
+                    leastLoss = batchLoss
 
-				if iter * BATCH_SIZE < dataloader.trainNum:
-					batch_w = trainSpectrum[iter * BATCH_SIZE:, :, :]
-					batch_x = trainPatch[iter * BATCH_SIZE:, :, :, :]
-					batch_y = trainLabel[iter * BATCH_SIZE:, :]
-					_, bl, ta = sess.run([optimizer, loss, accuracy],
-										 feed_dict={w: batch_w, x: batch_x, y: batch_y, k: DROP_OUT})
+                if iter * BATCH_SIZE < dataloader.trainNum:
+                    batch_w = trainSpectrum[iter * BATCH_SIZE:, :, :]
+                    batch_x = trainPatch[iter * BATCH_SIZE:, :, :, :]
+                    batch_y = trainLabel[iter * BATCH_SIZE:, :]
+                    _, bl, ta = sess.run([optimizer, loss, accuracy],
+                                         feed_dict={w: batch_w, x: batch_x, y: batch_y, k: DROP_OUT})
 
-				idx = np.random.choice(dataloader.testNum, size=BATCH_SIZE, replace=False)
-				test_batch_w = testSpectrum[idx, :, :]
-				test_batch_x = testPatch[idx, :, :, :]
-				test_batch_y = testLabel[idx, :]
-				ac, ls = sess.run([accuracy, loss], feed_dict={w: test_batch_w, x: test_batch_x, y: test_batch_y, k: 1})
-				pbar.set_postfix_str(
-					"loss: %.6f, accuracy:%.2f, testLoss:%.3f, testAcc:%.2f" % (batchLoss, trainAcc, ls, ac))
-				trainProcess.addData(batchLoss, trainAcc, ls, ac)
+                idx = np.random.choice(dataloader.testNum, size=BATCH_SIZE, replace=False)
+                test_batch_w = testSpectrum[idx, :, :]
+                test_batch_x = testPatch[idx, :, :, :]
+                test_batch_y = testLabel[idx, :]
+                ac, ls = sess.run([accuracy, loss], feed_dict={w: test_batch_w, x: test_batch_x, y: test_batch_y, k: 1})
+                pbar.set_postfix_str(
+                    "loss: %.6f, accuracy:%.2f, testLoss:%.3f, testAcc:%.2f" % (batchLoss, trainAcc, ls, ac))
+                trainProcess.addData(batchLoss, trainAcc, ls, ac)
 
-	if USE_BEST_MODEL:
-		saver.restore(sess, modelSavePath)
-	iter = dataloader.allLabeledNum // BATCH_SIZE
-	probMap = ProbMap(dataloader.numClasses, DIRECTORY, allLabeledLabel, allLabeledIndex, dataloader.height,
-					  dataloader.width, dataloader.trainIndex)
-	with tqdm(total=iter, desc="predicting...", ascii=TQDM_ASCII) as pbar:
-		for i in range(iter):
-			batch_w = allLabeledSpectrum[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :]
-			batch_x = allLabeledPatch[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :, :]
-			batch_y = allLabeledLabel[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :]
-			tmp = sess.run(pred, feed_dict={w: batch_w, x: batch_x, y: batch_y, k: 1})
-			probMap.addData(tmp)
-			pbar.update()
+    if USE_BEST_MODEL:
+        saver.restore(sess, modelSavePath)
+    iter = dataloader.allLabeledNum // BATCH_SIZE
+    probMap = ProbMap(dataloader.numClasses, DIRECTORY, allLabeledLabel, allLabeledIndex, dataloader.height,
+                      dataloader.width, dataloader.trainIndex)
+    with tqdm(total=iter, desc="predicting...", ascii=TQDM_ASCII) as pbar:
+        for i in range(iter):
+            batch_w = allLabeledSpectrum[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :]
+            batch_x = allLabeledPatch[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :, :, :]
+            batch_y = allLabeledLabel[i * BATCH_SIZE:(i + 1) * BATCH_SIZE, :]
+            tmp = sess.run(pred, feed_dict={w: batch_w, x: batch_x, y: batch_y, k: 1})
+            probMap.addData(tmp)
+            pbar.update()
 
-		if iter * BATCH_SIZE < dataloader.allLabeledNum:
-			batch_w = allLabeledSpectrum[iter * BATCH_SIZE:, :, :]
-			batch_x = allLabeledPatch[iter * BATCH_SIZE:, :, :, :]
-			batch_y = allLabeledLabel[iter * BATCH_SIZE:, :]
-			tmp = sess.run(pred, feed_dict={w: batch_w, x: batch_x, y: batch_y, k: 1})
-			probMap.addData(tmp)
+        if iter * BATCH_SIZE < dataloader.allLabeledNum:
+            batch_w = allLabeledSpectrum[iter * BATCH_SIZE:, :, :]
+            batch_x = allLabeledPatch[iter * BATCH_SIZE:, :, :, :]
+            batch_y = allLabeledLabel[iter * BATCH_SIZE:, :]
+            tmp = sess.run(pred, feed_dict={w: batch_w, x: batch_x, y: batch_y, k: 1})
+            probMap.addData(tmp)
 
-	probMap.finish()
-	print(np.shape(probMap.map))
+    probMap.finish()
+    print(np.shape(probMap.map))
 
-	if not DONT_SAVE_DATA:
-		if not PREDICT_ONLY:
-			trainProcess.save()
-		probMap.save()
+    if not DONT_SAVE_DATA:
+        if not PREDICT_ONLY:
+            trainProcess.save()
+        probMap.save()
 
 
-	OA = calOA(probMap.map, allLabeledLabel)
-	AA = calAA(probMap.map, allLabeledLabel)
-	kappa = calKappa(probMap.map, allLabeledLabel)
-	mixMatrix = calMixMatrix(probMap.map, allLabeledLabel)
+    OA = calOA(probMap.map, allLabeledLabel)
+    AA = calAA(probMap.map, allLabeledLabel)
+    kappa = calKappa(probMap.map, allLabeledLabel)
+    mixMatrix = calMixMatrix(probMap.map, allLabeledLabel)
 
-	with open(os.path.join(sumSavePath, "sum.txt"), "a+") as f:
-		print("data:%d, oa: %4f, aa:%4f, kappa:%4f" % \
-		      (DATA, OA, AA, kappa), file=f)
+    with open(os.path.join(sumSavePath, "sum.txt"), "a+") as f:
+        print("data:%d, oa: %4f, aa:%4f, kappa:%4f" % \
+              (DATA, OA, AA, kappa), file=f)
 
-	if NO_DETAILED_SUMMARY:
-		with open(os.path.join(dataSavePath, "sum.txt"), "a+") as f:
-			print("first layer: %2d, second layer:%2d, epochs:%3d, data:%d, oa: %4f, aa:%4f, kappa:%4f" %\
-				  (FIRST_LAYER, SECOND_LAYER, EPOCHS, DATA, OA, AA, kappa),file=f)
-	else:
-		with open(os.path.join(dataSavePath, "summary.txt"), "w+") as f:
-			print(args, file=f)
-			print("OA: %4f, AA: %4f, KAPPA: %4f" % (OA, AA, kappa), file=f)
-			print("******* MIX MAP *******", file=f)
-			print("   |", end="", file=f)
-			for i in range(dataloader.numClasses):
-				print("%6d" % i, end="", file=f)
-			print(file=f)
-			for i in range(6 * dataloader.numClasses + 4):
-				print("-", end="", file=f)
-			print(file=f)
-			for i in range(dataloader.numClasses):
-				print("%2d" % i, end=" |", file=f)
-				for j in range(dataloader.numClasses):
-					print("%6d" % mixMatrix[i][j], end="", file=f)
-				print(file=f)
+    if NO_DETAILED_SUMMARY:
+        with open(os.path.join(dataSavePath, "sum.txt"), "a+") as f:
+            print("first layer: %2d, second layer:%2d, epochs:%3d, data:%d, oa: %4f, aa:%4f, kappa:%4f" % \
+                  (FIRST_LAYER, SECOND_LAYER, EPOCHS, DATA, OA, AA, kappa),file=f)
+    else:
+        with open(os.path.join(dataSavePath, "summary.txt"), "w+") as f:
+            print(args, file=f)
+            print("OA: %4f, AA: %4f, KAPPA: %4f" % (OA, AA, kappa), file=f)
+            print("******* MIX MAP *******", file=f)
+            print("   |", end="", file=f)
+            for i in range(dataloader.numClasses):
+                print("%6d" % i, end="", file=f)
+            print(file=f)
+            for i in range(6 * dataloader.numClasses + 4):
+                print("-", end="", file=f)
+            print(file=f)
+            for i in range(dataloader.numClasses):
+                print("%2d" % i, end=" |", file=f)
+                for j in range(dataloader.numClasses):
+                    print("%6d" % mixMatrix[i][j], end="", file=f)
+                print(file=f)
 
-	if DRAW:
-		trainProcess.draw()
-		trainProcess.drawLoss()
-		trainProcess.drawAcc()
-		probMap.drawProbMap()
-		probMap.drawPredictedMap()
-		probMap.drawTrainMap()
-		probMap.drawTestMap()
-		probMap.drawGt()
+    if DRAW:
+        trainProcess.draw()
+        trainProcess.drawLoss()
+        trainProcess.drawAcc()
+        probMap.drawProbMap()
+        probMap.drawPredictedMap()
+        probMap.drawTrainMap()
+        probMap.drawTestMap()
+        probMap.drawGt()
